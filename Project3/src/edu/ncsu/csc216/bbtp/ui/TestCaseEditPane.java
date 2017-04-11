@@ -32,6 +32,11 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	private boolean add;
 	private boolean edit;
 
+	/**
+	 * Constructs a TestCaseEditPane
+	 * 
+	 * @param ttl
+	 */
 	public TestCaseEditPane(TestingTypeList ttl) {
 
 	}
