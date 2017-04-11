@@ -1,11 +1,15 @@
 package edu.ncsu.csc216.bbtp.ui;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 import javax.swing.JTable;
 
-public class TestCaseListPane {
-	private static final long serialVersionUID;
+import edu.ncsu.csc216.bbtp.model.TestCaseList;
+
+public class TestCaseListPane implements Serializable {
+
+	private static final long serialVersionUID = -2210716111020406799L;
 	private TestCaseList testCases;
 	private JTable table;
 	private int[] colWidths;

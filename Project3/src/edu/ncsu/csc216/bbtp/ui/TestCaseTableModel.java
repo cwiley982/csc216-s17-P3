@@ -1,9 +1,13 @@
 package edu.ncsu.csc216.bbtp.ui;
 
-public class TestCaseTableModel {
+import java.io.Serializable;
 
-	private static final long serialVersionUID;
+public class TestCaseTableModel implements Serializable {
+
+	private static final long serialVersionUID = 5954551753060998701L;
+	/** Array of the names of each column in the table */
 	private String[] colNames;
+	/** 2D array containing all the data in the table */
 	private Object[][] data;
 
 	public TestCaseTableModel(Object[][] testCases) {

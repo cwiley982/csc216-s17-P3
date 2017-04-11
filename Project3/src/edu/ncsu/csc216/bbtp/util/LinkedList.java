@@ -1,10 +1,11 @@
 package edu.ncsu.csc216.bbtp.util;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class LinkedList implements List {
+public class LinkedList implements List, Serializable {
 
-	private static final long serialVersionUID;
+	private static final long serialVersionUID = 349987L;
 	private Node head;
 
 	public LinkedList() {
@@ -51,9 +52,9 @@ public class LinkedList implements List {
 		return -1;
 	}
 
-	public class Node {
-		private static final long serialVersionUID;
-		private Object value; // not right, place holder until I figure it out
+	public class Node implements Serializable {
+		private static final long serialVersionUID = 484909840L;
+		protected Object value; // not right, place holder until I figure it out
 		private Node next;
 
 		public Node(Object obj, Node node) {

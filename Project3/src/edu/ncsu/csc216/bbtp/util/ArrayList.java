@@ -1,9 +1,10 @@
 package edu.ncsu.csc216.bbtp.util;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ArrayList implements List {
-	private static final long serialVersionUID;
+public class ArrayList implements List, Serializable {
+	private static final long serialVersionUID = 28592L;
 	private static final int RESIZE;
 	private Object[] list;
 	private int size;
