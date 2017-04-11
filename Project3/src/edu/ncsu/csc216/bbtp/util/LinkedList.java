@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.bbtp.util;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class LinkedList implements List, Serializable {
 
@@ -12,7 +11,6 @@ public class LinkedList implements List, Serializable {
 
 	}
 
-	@Override
 	public boolean add(Object obj) {
 		return false;
 	}
