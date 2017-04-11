@@ -11,6 +11,7 @@ import java.util.Observable;
  *
  */
 public class TestCaseList extends Observable implements Tabular, Serializable {
+
 	private static final long serialVersionUID = 98734509L;
 	/** The name of the test case list */
 	private String name;
@@ -98,27 +99,65 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 		return false;
 	}
 
+	/**
+	 * Gets the test case at the given index
+	 * 
+	 * @param idx
+	 *            index to get test case from
+	 * @return the test case at the index given
+	 */
 	public TestCase getTestCaseAt(int idx) {
 		return null;
 	}
 
-	public int indexOf(String arg) {
+	/**
+	 * Gets the index of the test case whose id matches the one given
+	 * 
+	 * @param id
+	 *            the id to check for
+	 * @return the test case with matching id
+	 */
+	public int indexOf(String id) {
 		return -1;
 	}
 
+	/**
+	 * Gets the size of the list
+	 * 
+	 * @return number of test cases in the list
+	 */
 	public int size() {
 		return -1;
 	}
 
+	/**
+	 * Tells whether the list is empty or not
+	 * 
+	 * @return true if list is empty, false otherwise
+	 */
 	public boolean isEmpty() {
 		return false;
 	}
 
+	/**
+	 * Removes the test case at the given index
+	 * 
+	 * @param idx
+	 *            the index to remove a test case from
+	 * @return the test case removed
+	 */
 	public TestCase removeTestCaseAt(int idx) {
 		return null;
 	}
 
-	public boolean removeTestCase(String arg) {
+	/**
+	 * Removes the test case whose id matches the one given
+	 * 
+	 * @param testCaseID
+	 *            the id of the test case to remove
+	 * @return true if there exists a test case with that id and it was removed
+	 */
+	public boolean removeTestCase(String testCaseID) {
 		return false;
 	}
 
@@ -128,6 +167,14 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 		return null;
 	}
 
+	/**
+	 * Notifies the observers of a change to the list
+	 * 
+	 * @param observable
+	 *            the action being observed, triggers a notification
+	 * @param obj
+	 *            the objects to be notified of the change
+	 */
 	public void update(Observable observable, Object obj) {
 
 	}

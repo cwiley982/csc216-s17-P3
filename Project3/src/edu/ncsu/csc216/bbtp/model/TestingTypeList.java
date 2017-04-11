@@ -3,7 +3,6 @@ package edu.ncsu.csc216.bbtp.model;
 import java.io.Serializable;
 import java.util.Observable;
 
-import edu.ncsu.csc216.bbtp.model.TestingType;
 import edu.ncsu.csc216.bbtp.util.ArrayList;
 
 /**
@@ -137,7 +136,15 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 		return null;
 	}
 
-	public void update(Observable oservable, Object obj) {
+	/**
+	 * Notifies the observers of a change to the list
+	 * 
+	 * @param observable
+	 *            the action being observed, triggers a notification
+	 * @param obj
+	 *            the objects to be notified of the change
+	 */
+	public void update(Observable observable, Object obj) {
 
 	}
 }
