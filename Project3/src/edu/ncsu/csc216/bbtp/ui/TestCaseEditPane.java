@@ -1,11 +1,14 @@
 package edu.ncsu.csc216.bbtp.ui;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -13,7 +16,7 @@ import javax.swing.JTextField;
 import edu.ncsu.csc216.bbtp.model.TestingType;
 import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
-public class TestCaseEditPane extends Observable {
+public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 
 	private static final long serialVersionUID = 5479139338455751629L;
 	private TestingTypeList testingTypes;

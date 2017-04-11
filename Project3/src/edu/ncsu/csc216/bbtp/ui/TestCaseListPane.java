@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
@@ -15,7 +16,7 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  * @author Caitlyn
  *
  */
-public class TestCaseListPane implements Serializable, Observer {
+public class TestCaseListPane extends JPanel implements Serializable, Observer {
 
 	private static final long serialVersionUID = -2210716111020406799L;
 	private TestCaseList testCases;
