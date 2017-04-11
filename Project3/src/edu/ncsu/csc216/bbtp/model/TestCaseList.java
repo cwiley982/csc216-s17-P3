@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
 
-import edu.ncsu.csc216.bbtp.model.TestingType;
-import junit.framework.TestCase;
-
 /**
  * Holds a lost of TestCases
  * 
