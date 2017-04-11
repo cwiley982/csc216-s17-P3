@@ -38,7 +38,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return name of the current list
 	 */
 	public String getName() {
-		return "";
+		return name;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            name of the list
 	 */
 	public void setName(String name) {
-
+		this.name = name;
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the list's id
 	 */
 	public String getTestCaseListID() {
-		return "";
+		return testCaseListID;
 	}
 
 	private void setTestCaseListID() {
@@ -65,7 +65,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	}
 
 	private int getNextTestCaseNum() {
-		return -1;
+		return nextTestCaseNum;
 	}
 
 	private void incNextTestCaseNum() {

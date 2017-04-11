@@ -40,7 +40,7 @@ public class TestCaseListPane implements Serializable, Observer {
 	 * @return tctm - defined above
 	 */
 	public TestCaseTableModel getTestCaseTableModel() {
-		return null;
+		return tctm;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class TestCaseListPane implements Serializable, Observer {
 	 * @return a JTable with test case info
 	 */
 	public JTable getTable() {
-		return null;
+		return table;
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return name of the list
 	 */
 	public String getName() {
-		return "";
+		return name;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return size of list
 	 */
 	public int size() {
-		return -1;
+		return list.size();
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return true if list contains 0 elements, false otherwise
 	 */
 	public boolean isEmpty() {
-		return false;
+		return list.isEmpty();
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	}
 
 	private int getNextTestingTypeNum() {
-		return -1;
+		return nextTestingTypeNum;
 	}
 
 	private void incNextTestingTypeNum() {

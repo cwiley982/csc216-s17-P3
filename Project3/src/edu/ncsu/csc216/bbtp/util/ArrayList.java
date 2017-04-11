@@ -74,6 +74,6 @@ public class ArrayList implements List, Serializable {
 
 	@Override
 	public int size() {
-		return -1;
+		return size;
 	}
 }
