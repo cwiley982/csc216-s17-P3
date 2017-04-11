@@ -4,8 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
 
+/**
+ * Class for creating a TestCase object
+ * 
+ * @author Cameron
+ * @author Caitlyn
+ *
+ */
 public class TestCase extends Observable implements Comparable<TestCase>, Serializable {
-
+	/** Serializable ID */
 	private static final long serialVersionUID = 7459L;
 	private String testCaseID;
 	private Date creationDateTime;
@@ -16,8 +23,21 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	private boolean testedStatus;
 	private boolean pass;
 
-	public TestCase(String s, String f, TestingType tt, Date d, String j, boolean tf, Date d2, String idk,
-			boolean tf2) {
+	/**
+	 * Constructs a new TestCase
+	 * 
+	 * @param s
+	 * @param f
+	 * @param tt
+	 * @param d
+	 * @param j
+	 * @param tf
+	 * @param d2
+	 * @param idk
+	 * @param tf2
+	 */
+	public TestCase(String id, String description, TestingType testingType, Date creationDateTime,
+			String expectedResults, boolean tested, Date lastTestedDate, String actualResults, boolean pass) {
 
 	}
 
