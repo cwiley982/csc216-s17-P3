@@ -1,8 +1,9 @@
 package edu.ncsu.csc216.bbtp.model;
 
 import java.io.Serializable;
+import java.util.Observable;
 
-public class TestingType implements Serializable, Comparable<TestingType> {
+public class TestingType extends Observable implements Serializable, Comparable<TestingType> {
 
 	private static final long serialVersionUID = 459188L;
 	private String name;
