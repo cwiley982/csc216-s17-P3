@@ -28,7 +28,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * creates a new BBTP Object and initializes state
 	 */
 	public BBTP() {
-
+		// empty constructor
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the value stored in changed
 	 */
 	public boolean isChanged() {
-		return false;
+		return changed;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            boolean to set
 	 */
 	public void setChanged(boolean tf) {
-
+		// TODO
 	}
 
 	/**
@@ -75,14 +75,14 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return nextTestCaseListNum
 	 */
 	private int getNextTestCaseListNum() {
-		return 0;
+		return nextTestCaseListNum;
 	}
 
 	/**
 	 * increments the nextTestCaseListNum variable
 	 */
 	private void incNextTestCaseListNum() {
-
+		nextTestCaseListNum++;
 	}
 
 	/**
@@ -91,7 +91,10 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the number of testCaseLists
 	 */
 	public int getNumTestCaseLists() {
-		return 0;
+		// TODO
+		getNextTestCaseListNum();
+		incNextTestCaseListNum();
+		return numLists;
 	}
 
 	/**
@@ -121,7 +124,11 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the index of the added testCaseList
 	 */
 	public int addTestCaseList() {
-		return 0;
+		// TODO
+		if (RESIZE < numLists)
+			return 0;
+		else
+			return 1;
 	}
 
 	/**
@@ -131,7 +138,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            the index to remove from
 	 */
 	public void removeTestCaseList(int idx) {
-
+		// TODO
 	}
 
 	/**
@@ -165,6 +172,6 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            changed object
 	 */
 	public void update(Observable o, Object arg) {
-
+		// TODO
 	}
 }

@@ -28,7 +28,7 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 *            description of the test type
 	 */
 	public TestingType(String id, String name, String desc) {
-
+		// TODO
 	}
 
 	/**
@@ -75,6 +75,8 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 * @return id of the testing type
 	 */
 	public String getTestingTypeID() {
+		// TODO
+		setTestingTypeID("fake");
 		return testingTypeID;
 	}
 

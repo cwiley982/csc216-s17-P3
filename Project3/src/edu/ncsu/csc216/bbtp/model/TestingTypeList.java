@@ -22,7 +22,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * Constructs the ArrayList and sets nextTestingTypeNum to 1
 	 */
 	public TestingTypeList() {
-
+		// TODO
 	}
 
 	/**
@@ -119,6 +119,9 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *         found)
 	 */
 	public boolean removeTestingType(String id) {
+		// TODO
+		getNextTestingTypeNum();
+		incNextTestingTypeNum();
 		return false;
 	}
 
@@ -127,7 +130,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	}
 
 	private void incNextTestingTypeNum() {
-
+		// TODO
 	}
 
 	@Override
@@ -145,6 +148,6 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *            the objects to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-
+		// TODO
 	}
 }

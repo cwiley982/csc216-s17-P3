@@ -58,14 +58,16 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 * TestCaseTableModel
 	 */
 	private void initView() {
-
+		// TODO
 	}
 
 	/**
 	 * Clears the current data
 	 */
 	public void clearSelection() {
-
+		// TODO
+		if (colWidths != null && testCases != null)
+			initView();
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 *            the object (observer) to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-
+		// TODO
 	}
 
 }

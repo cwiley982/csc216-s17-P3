@@ -24,7 +24,7 @@ public class TestCaseTableModel implements Serializable {
 	 *            the 2D array with test case data
 	 */
 	public TestCaseTableModel(Object[][] testCases) {
-
+		// TODO
 	}
 
 	/**
@@ -78,7 +78,9 @@ public class TestCaseTableModel implements Serializable {
 	 *            column to consider
 	 */
 	public void setValueAt(Object obj, int row, int col) {
-
+		// TODO
+		if (colNames != null && data != null)
+			getTestCaseRowData(3);
 	}
 
 	/**
@@ -102,7 +104,7 @@ public class TestCaseTableModel implements Serializable {
 	 *            the TestCaseData object to get the data from
 	 */
 	public void setTaskRowData(int row, TestCaseData data) {
-
+		// TODO
 	}
 
 }

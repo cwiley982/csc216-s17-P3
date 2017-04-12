@@ -47,7 +47,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 */
 	public TestCase(String id, String description, TestingType testingType, Date creationDateTime,
 			String expectedResults, boolean tested, Date lastTestedDate, String actualResults, boolean pass) {
-
+		// TODO
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            boolean to set
 	 */
 	public void setTestedStatus(boolean tf) {
-
+		// TODO
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            true or false
 	 */
 	public void setPass(boolean tf) {
-
+		// TODO
 	}
 
 	/**
@@ -190,7 +190,8 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            testing type to set
 	 */
 	public void setTestingType(TestingType tt) {
-
+		// TODO
+		setTestCaseID("fake");
 	}
 
 	/**
@@ -212,7 +213,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	}
 
 	private void setTestCaseID(String s) {
-
+		// TODO
 	}
 
 	@Override

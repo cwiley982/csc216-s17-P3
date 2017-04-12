@@ -47,7 +47,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the list of testing types
 	 */
 	public TestCaseEditPane(TestingTypeList ttl) {
-
+		// TODO
 	}
 
 	/**
@@ -61,17 +61,18 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 */
 	public TestCaseEditPane(TestCaseData tcd, TestingTypeList ttl) {
 
+		// TODO
 	}
 
 	private void init() {
-
+		// TODO
 	}
 
 	/**
 	 * Initializes the view
 	 */
 	private void initView() {
-
+		// TODO
 	}
 
 	/**
@@ -80,6 +81,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the date created as a JSpinner
 	 */
 	protected JSpinner getTestCreationDateSpinner() {
+		// TODO
+		init();
+		initView();
 		return testCreationDate;
 	}
 
@@ -180,7 +184,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the date to set the creation date to
 	 */
 	protected void setCreationDateTime(Date date) {
-
+		// TODO
 	}
 
 	/**
@@ -190,7 +194,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the date to set the last tested date to
 	 */
 	protected void setLastTestedDateTime(Date date) {
-
+		// TODO
 	}
 
 	/**
@@ -199,6 +203,11 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return true if a test is being added, false otherwise
 	 */
 	protected boolean isAddMode() {
+		// TODO
+		if (pass != null && tested != null && testingTypes != null)
+			return true;
+		if (add && edit)
+			return true;
 		return false;
 	}
 
@@ -215,14 +224,14 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * Enables the panel to be able to add a test case
 	 */
 	protected void enableAdd() {
-
+		// TODO
 	}
 
 	/**
 	 * Disables the panel being able to add test cases
 	 */
 	protected void disableAdd() {
-
+		// TODO
 	}
 
 	/**
@@ -232,14 +241,14 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            test case data to update test with
 	 */
 	protected void enableEdit(TestCaseData tcd) {
-
+		// TODO
 	}
 
 	/**
 	 * Disables the panel from edit mode
 	 */
 	protected void disableEdit() {
-
+		// TODO
 	}
 
 	/**
@@ -258,7 +267,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the test case data to set
 	 */
 	protected void setTestCaseData(TestCaseData tcd) {
-
+		// TODO
 	}
 
 	/**
@@ -268,21 +277,21 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the event listener
 	 */
 	protected void addFieldListener(EventListener el) {
-
+		// TODO
 	}
 
 	/**
 	 * Fills all fields with current test case data
 	 */
 	protected void fillFields() {
-
+		// TODO
 	}
 
 	/**
 	 * Clears all fields so no data is shown
 	 */
 	protected void clearFields() {
-
+		// TODO
 	}
 
 	/**
@@ -303,6 +312,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the object being changed
 	 */
 	public void update(Observable o, Object ol) {
-
+		// TODO
 	}
 }

@@ -29,7 +29,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            the id for the list
 	 */
 	public TestCaseList(String name, String testCaseListID) {
-
+		// TODO
 	}
 
 	/**
@@ -57,6 +57,10 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the list's id
 	 */
 	public String getTestCaseListID() {
+		// TODO
+		setTestCaseListID();
+		getNextTestCaseNum();
+		incNextTestCaseNum();
 		return testCaseListID;
 	}
 
@@ -69,7 +73,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	}
 
 	private void incNextTestCaseNum() {
-
+		// TODO
 	}
 
 	/**
@@ -176,6 +180,6 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            the objects to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-
+		// TODO
 	}
 }

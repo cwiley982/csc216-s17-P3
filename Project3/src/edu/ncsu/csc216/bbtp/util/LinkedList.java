@@ -18,7 +18,7 @@ public class LinkedList implements List, Serializable {
 	 * Constructs a linked list
 	 */
 	public LinkedList() {
-
+		// TODO
 	}
 
 	/**
@@ -29,12 +29,15 @@ public class LinkedList implements List, Serializable {
 	 * @return true if object can be added
 	 */
 	public boolean add(Object obj) {
+		// TODO
+		if (head != null)
+			return true;
 		return false;
 	}
 
 	@Override
 	public void add(int idx, Object obj) {
-
+		// TODO
 	}
 
 	@Override
@@ -90,7 +93,9 @@ public class LinkedList implements List, Serializable {
 		 *            the next node after the one being created
 		 */
 		public Node(Object obj, Node node) {
-
+			// TODO
+			if (next != null)
+				next = new Node(obj, node);
 		}
 	}
 }

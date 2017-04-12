@@ -19,7 +19,7 @@ public class ArrayList implements List, Serializable {
 	 * Constructs an empty arraylist and initializes its state
 	 */
 	public ArrayList() {
-
+		// TODO
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class ArrayList implements List, Serializable {
 	 *            size of array list
 	 */
 	public ArrayList(int num) {
-
+		// TODO
 	}
 
 	/**
@@ -40,12 +40,14 @@ public class ArrayList implements List, Serializable {
 	 * @return true if object can be added, false otherwise
 	 */
 	public boolean add(Object obj) {
+		if (list != null && RESIZE != 6)
+			return true;
 		return false;
 	}
 
 	@Override
 	public void add(int idx, Object obj) {
-
+		// TODO
 	}
 
 	@Override
