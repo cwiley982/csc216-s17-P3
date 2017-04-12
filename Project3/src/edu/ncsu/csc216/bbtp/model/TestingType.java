@@ -3,6 +3,13 @@ package edu.ncsu.csc216.bbtp.model;
 import java.io.Serializable;
 import java.util.Observable;
 
+/**
+ * Class to hold the testing type of each test case
+ * 
+ * @author Cameron
+ * @author Caitlyn
+ *
+ */
 public class TestingType extends Observable implements Serializable, Comparable<TestingType> {
 
 	private static final long serialVersionUID = 459188L;
@@ -10,30 +17,73 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	private String description;
 	private String testingTypeID;
 
-	public TestingType(String i, String d, String k) {
+	/**
+	 * creates new testing type and initializes state
+	 * 
+	 * @param id
+	 *            id of the test type
+	 * @param name
+	 *            name of the test type
+	 * @param desc
+	 *            description of the test type
+	 */
+	public TestingType(String id, String name, String desc) {
 
 	}
 
+	/**
+	 * gets name of the testing type
+	 * 
+	 * @return name of the testing type
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * sets the name of the tetsting type
+	 * 
+	 * @param name
+	 *            name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * gets the description of the testing type
+	 * 
+	 * @return description of the testing type
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * sets the description of the testing type
+	 * 
+	 * @param description
+	 *            description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * gets the id of the testing type
+	 * 
+	 * @return id of the testing type
+	 */
 	public String getTestingTypeID() {
 		return testingTypeID;
 	}
 
+	/**
+	 * sets the id of the testing type
+	 * 
+	 * @param testingTypeID
+	 *            the testing type id to set
+	 */
 	private void setTestingTypeID(String testingTypeID) {
 		this.testingTypeID = testingTypeID;
 	}

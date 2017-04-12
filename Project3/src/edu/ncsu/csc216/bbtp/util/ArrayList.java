@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Creates an array list that is serializable
  * 
  * @author Caitlyn
+ * @author Cameron
  *
  */
 public class ArrayList implements List, Serializable {

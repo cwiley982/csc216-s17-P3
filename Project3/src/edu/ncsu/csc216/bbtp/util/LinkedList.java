@@ -2,6 +2,13 @@ package edu.ncsu.csc216.bbtp.util;
 
 import java.io.Serializable;
 
+/**
+ * Creates a serializable LinkedList
+ * 
+ * @author Cameron
+ * @author Caitlyn
+ *
+ */
 public class LinkedList implements List, Serializable {
 
 	private static final long serialVersionUID = 349987L;
