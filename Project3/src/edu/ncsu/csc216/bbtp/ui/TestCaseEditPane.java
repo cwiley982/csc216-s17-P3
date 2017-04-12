@@ -16,6 +16,14 @@ import javax.swing.JTextField;
 import edu.ncsu.csc216.bbtp.model.TestingType;
 import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
+/**
+ * Creates a TestCaseEditPane that the user will see to add a test and edit
+ * existing test's data
+ * 
+ * @author Caitlyn
+ * @author Cameron
+ *
+ */
 public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 
 	private static final long serialVersionUID = 5479139338455751629L;
