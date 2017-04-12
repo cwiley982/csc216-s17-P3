@@ -26,85 +26,187 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	/**
 	 * Constructs a new TestCase
 	 * 
-	 * @param s
-	 * @param f
-	 * @param tt
-	 * @param d
-	 * @param j
-	 * @param tf
-	 * @param d2
-	 * @param idk
-	 * @param tf2
+	 * @param id
+	 *            id of the test case
+	 * @param description
+	 *            description of the test case
+	 * @param testingType
+	 *            the testing type of the test case
+	 * @param creationDateTime
+	 *            the date and time the test case was created
+	 * @param expectedResults
+	 *            the expected results of the test
+	 * @param tested
+	 *            whether or not the test case has been tested
+	 * @param lastTestedDate
+	 *            date the test case was last tested
+	 * @param actualResults
+	 *            the actual results of the test
+	 * @param pass
+	 *            whether or not the test passed
 	 */
 	public TestCase(String id, String description, TestingType testingType, Date creationDateTime,
 			String expectedResults, boolean tested, Date lastTestedDate, String actualResults, boolean pass) {
 
 	}
 
+	/**
+	 * gets the description of the test case
+	 * 
+	 * @return the description of the test case
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * sets the description of the test case
+	 * 
+	 * @param description
+	 *            the description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * gets the expected results of the test
+	 * 
+	 * @return the expected results of the test
+	 */
 	public String getExpectedResults() {
 		return expectedResults;
 	}
 
+	/**
+	 * sets the expected results of the test
+	 * 
+	 * @param expectedResults
+	 *            expected results to set
+	 */
 	public void setExpectedResults(String expectedResults) {
 		this.expectedResults = expectedResults;
 	}
 
+	/**
+	 * returns the actual results of the test
+	 * 
+	 * @return the actual results of the test
+	 */
 	public String getActualResults() {
 		return actualResults;
 	}
 
+	/**
+	 * sets the actual results of the test
+	 * 
+	 * @param actualResults
+	 *            actual results to set
+	 */
 	public void setActualResults(String actualResults) {
 		this.actualResults = actualResults;
 	}
 
+	/**
+	 * gets the date and time the test was created
+	 * 
+	 * @return the date and time the test was created
+	 */
 	public Date getCreationDateTime() {
 		return creationDateTime;
 	}
 
+	/**
+	 * sets the date the test was created
+	 * 
+	 * @param creationDateTime
+	 *            creation date to set
+	 */
 	public void setCreationDateTime(Date creationDateTime) {
 		this.creationDateTime = creationDateTime;
 	}
 
+	/**
+	 * gets the last tested date and time
+	 * 
+	 * @return date the test was lasted tested
+	 */
 	public Date getLastTestedDateTime() {
 		return lastTestedDateTime;
 	}
 
+	/**
+	 * sets the date and time the test was last tested
+	 * 
+	 * @param lastTestedDateTime
+	 *            last tested date to set
+	 */
 	public void setLastTestedDateTime(Date lastTestedDateTime) {
 		this.lastTestedDateTime = lastTestedDateTime;
 	}
 
+	/**
+	 * determines if the test has been tested
+	 * 
+	 * @return true or false
+	 */
 	public boolean tested() {
 		return false;
 	}
 
+	/**
+	 * sets whether the test has been tested
+	 * 
+	 * @param tf
+	 *            boolean to set
+	 */
 	public void setTestedStatus(boolean tf) {
 
 	}
 
+	/**
+	 * determines if the test passed
+	 * 
+	 * @return true or false
+	 */
 	public boolean pass() {
 		return false;
 	}
 
+	/**
+	 * sets whether or not the test passed
+	 * 
+	 * @param tf
+	 *            true or false
+	 */
 	public void setPass(boolean tf) {
 
 	}
 
+	/**
+	 * sets the testing type for the test case
+	 * 
+	 * @param tt
+	 *            testing type to set
+	 */
 	public void setTestingType(TestingType tt) {
 
 	}
 
+	/**
+	 * gets the testing type of the test
+	 * 
+	 * @return the testing type of the test
+	 */
 	public TestingType getTestingType() {
 		return null;
 	}
 
+	/**
+	 * gets the test case id
+	 * 
+	 * @return the test case id
+	 */
 	public String getTestCaseID() {
 		return null;
 	}
@@ -175,7 +277,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	}
 
 	@Override
-	public int compareTo(TestCase arg0) {
+	public int compareTo(TestCase tc) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
