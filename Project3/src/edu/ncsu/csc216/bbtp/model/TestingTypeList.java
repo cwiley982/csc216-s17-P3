@@ -22,6 +22,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * Constructs the ArrayList and sets nextTestingTypeNum to 1
 	 */
 	public TestingTypeList() {
+		list = new ArrayList();
 		// TODO
 	}
 
