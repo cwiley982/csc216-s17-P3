@@ -22,6 +22,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	private Date lastTestedDateTime;
 	private boolean testedStatus;
 	private boolean pass;
+	private TestingType testingType;
 
 	/**
 	 * Constructs a new TestCase
@@ -47,7 +48,18 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 */
 	public TestCase(String id, String description, TestingType testingType, Date creationDateTime,
 			String expectedResults, boolean tested, Date lastTestedDate, String actualResults, boolean pass) {
-		// TODO
+		setTestCaseID(id);
+		setDescription(description);
+		setTestingType(testingType);
+		setCreationDateTime(creationDateTime);
+		setExpectedResults(expectedResults);
+		setTestedStatus(tested);
+		setLastTestedDateTime(lastTestedDate);
+		setActualResults(actualResults);
+		setPass(pass);
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -66,7 +78,19 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
+		if (description == null || description.isEmpty())
+			throw new IllegalArgumentException();
+		int count = 0;
+		for (int i = 0; i < description.length(); i++) {
+			if (Character.isWhitespace(description.charAt(i)))
+				count++;
+		}
+		if (count == description.length())
+			throw new IllegalArgumentException();
 		this.description = description;
+		setChanged();
+		notifyObservers(this);
+		clearChanged(); // potential point of failure, can be removed.
 	}
 
 	/**
@@ -85,7 +109,19 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            expected results to set
 	 */
 	public void setExpectedResults(String expectedResults) {
+		if (expectedResults == null || expectedResults.isEmpty())
+			throw new IllegalArgumentException();
+		int count = 0;
+		for (int i = 0; i < expectedResults.length(); i++) {
+			if (Character.isWhitespace(expectedResults.charAt(i)))
+				count++;
+		}
+		if (count == expectedResults.length())
+			throw new IllegalArgumentException();
 		this.expectedResults = expectedResults;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -104,7 +140,19 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            actual results to set
 	 */
 	public void setActualResults(String actualResults) {
+		if (actualResults == null || actualResults.isEmpty())
+			throw new IllegalArgumentException();
+		int count = 0;
+		for (int i = 0; i < actualResults.length(); i++) {
+			if (Character.isWhitespace(actualResults.charAt(i)))
+				count++;
+		}
+		if (count == actualResults.length())
+			throw new IllegalArgumentException();
 		this.actualResults = actualResults;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -123,7 +171,12 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            creation date to set
 	 */
 	public void setCreationDateTime(Date creationDateTime) {
+		if (creationDateTime == null)
+			throw new IllegalArgumentException();
 		this.creationDateTime = creationDateTime;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -142,7 +195,12 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            last tested date to set
 	 */
 	public void setLastTestedDateTime(Date lastTestedDateTime) {
+		if (lastTestedDateTime == null)
+			throw new IllegalArgumentException();
 		this.lastTestedDateTime = lastTestedDateTime;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -151,7 +209,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 * @return true or false
 	 */
 	public boolean tested() {
-		return false;
+		return testedStatus;
 	}
 
 	/**
@@ -161,7 +219,10 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            boolean to set
 	 */
 	public void setTestedStatus(boolean tf) {
-		// TODO
+		this.testedStatus = tf;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -170,7 +231,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 * @return true or false
 	 */
 	public boolean pass() {
-		return false;
+		return pass;
 	}
 
 	/**
@@ -180,7 +241,10 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            true or false
 	 */
 	public void setPass(boolean tf) {
-		// TODO
+		this.pass = tf;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -190,8 +254,12 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            testing type to set
 	 */
 	public void setTestingType(TestingType tt) {
-		// TODO
-		setTestCaseID("fake");
+		if (tt == null)
+			throw new IllegalArgumentException();
+		this.testingType = tt;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -200,7 +268,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 * @return the testing type of the test
 	 */
 	public TestingType getTestingType() {
-		return null;
+		return testingType;
 	}
 
 	/**
@@ -209,11 +277,12 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 * @return the test case id
 	 */
 	public String getTestCaseID() {
-		return null;
+		return testCaseID;
 	}
 
-	private void setTestCaseID(String s) {
-		// TODO
+	private void setTestCaseID(String id) {
+		if (id == null || id.isEmpty())
+			throw new IllegalArgumentException();
 	}
 
 	@Override
@@ -279,8 +348,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 
 	@Override
 	public int compareTo(TestCase tc) {
-		// TODO Auto-generated method stub
-		return 0;
+		return tc.getCreationDateTime().compareTo(this.creationDateTime);
 	}
 
 }
