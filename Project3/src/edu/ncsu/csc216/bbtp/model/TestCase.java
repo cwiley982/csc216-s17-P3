@@ -297,6 +297,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		result = prime * result + (pass ? 1231 : 1237);
 		result = prime * result + ((testCaseID == null) ? 0 : testCaseID.hashCode());
 		result = prime * result + (testedStatus ? 1231 : 1237);
+		result = prime * result + ((testingType == null) ? 0 : testingType.hashCode());
 		return result;
 	}
 
@@ -342,6 +343,11 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		} else if (!testCaseID.equals(other.testCaseID))
 			return false;
 		if (testedStatus != other.testedStatus)
+			return false;
+		if (testingType == null) {
+			if (other.testingType != null)
+				return false;
+		} else if (!testingType.equals(other.testingType))
 			return false;
 		return true;
 	}
