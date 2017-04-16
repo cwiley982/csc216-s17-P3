@@ -28,7 +28,9 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 *            description of the test type
 	 */
 	public TestingType(String id, String name, String desc) {
-		// TODO
+		setTestingTypeID(id);
+		setName(name);
+		setDescription(desc);
 	}
 
 	/**
@@ -41,13 +43,18 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	}
 
 	/**
-	 * sets the name of the tetsting type
+	 * sets the name of the testing type
 	 * 
 	 * @param name
 	 *            name to set
 	 */
 	public void setName(String name) {
+		if (name == null || name.isEmpty())
+			throw new IllegalArgumentException();
 		this.name = name;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -67,6 +74,9 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -75,8 +85,6 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 * @return id of the testing type
 	 */
 	public String getTestingTypeID() {
-		// TODO
-		setTestingTypeID("fake");
 		return testingTypeID;
 	}
 
@@ -87,28 +95,17 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	 *            the testing type id to set
 	 */
 	private void setTestingTypeID(String testingTypeID) {
+		if (testingTypeID == null || testingTypeID.isEmpty())
+			throw new IllegalArgumentException();
 		this.testingTypeID = testingTypeID;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		TestingType other = (TestingType) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (testingTypeID == null) {
 			if (other.testingTypeID != null)
 				return false;
@@ -118,9 +115,8 @@ public class TestingType extends Observable implements Serializable, Comparable<
 	}
 
 	@Override
-	public int compareTo(TestingType o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(TestingType tt) {
+		return tt.getName().compareTo(this.getName());
 	}
 
 	@Override

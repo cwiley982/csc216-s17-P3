@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public class ArrayList implements List, Serializable {
 	private static final long serialVersionUID = 28592L;
-	private static final int RESIZE = 0;
+	private static final int RESIZE = 2;
 	private Object[] list;
 	private int size;
 
@@ -19,7 +19,8 @@ public class ArrayList implements List, Serializable {
 	 * Constructs an empty arraylist and initializes its state
 	 */
 	public ArrayList() {
-		// TODO
+		list = new Object[0];
+		size = 0;
 	}
 
 	/**
@@ -29,7 +30,8 @@ public class ArrayList implements List, Serializable {
 	 *            size of array list
 	 */
 	public ArrayList(int num) {
-		// TODO
+		list = new Object[num];
+		size = num;
 	}
 
 	/**
@@ -40,39 +42,106 @@ public class ArrayList implements List, Serializable {
 	 * @return true if object can be added, false otherwise
 	 */
 	public boolean add(Object obj) {
-		if (list != null && RESIZE != 6)
-			return true;
-		return false;
+		if (obj == null)
+			return false;
+		if (list[list.length - 1] != null)
+			growArray();
+		list[size] = obj;
+		size++;
+		return true;
 	}
 
 	@Override
 	public void add(int idx, Object obj) {
-		// TODO
+		if (size == list.length) {
+			growArray();
+		}
+
+		if (obj == null) {
+			throw new NullPointerException();
+		}
+
+		if (idx < 0 || idx > size) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		for (int i = 0; i < size; i++) {
+			if (list[i].equals(obj)) {
+				throw new IllegalArgumentException();
+			}
+		}
+
+		if (idx == size) {
+			list[size] = obj;
+		} else {
+			for (int i = size; i > idx; i--) {
+				list[i] = list[i - 1];
+			}
+			list[idx] = obj;
+		}
+		size++;
+	}
+
+	private void growArray() {
+		Object[] tempList = new Object[list.length * RESIZE];
+		for (int i = 0; i < list.length; i++) {
+			tempList[i] = list[i];
+		}
+		list = tempList;
 	}
 
 	@Override
 	public boolean contains(Object obj) {
+		for (int i = 0; i < size; i++) {
+			if (list[i].equals(obj))
+				return true;
+		}
 		return false;
 	}
 
 	@Override
 	public Object get(int idx) {
-		return null;
+		if (idx < 0 || idx >= size) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			return list[idx];
+		}
 	}
 
 	@Override
 	public int indexOf(Object obj) {
+		for (int i = 0; i < size; i++) {
+			if (list[i].equals(obj))
+				return i;
+		}
 		return -1;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return false;
+		return size <= 0;
 	}
 
 	@Override
-	public Object remove(int idx) {
-		return null;
+	public Object remove(int index) {
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		Object removed = list[index];
+
+		if (index == size - 1) {
+			list[index] = null;
+		}
+
+		list[index] = null;
+		for (int i = index; i < size - 1; i++) {
+			list[i] = list[i + 1];
+		}
+		list[size - 1] = null;
+		size--;
+
+		return removed;
 	}
 
 	@Override
