@@ -16,7 +16,7 @@ public class ArrayList implements List, Serializable {
 	private int size;
 
 	/**
-	 * Constructs an empty arraylist and initializes its state
+	 * Constructs an empty array list and initializes its state
 	 */
 	public ArrayList() {
 		list = new Object[0];
