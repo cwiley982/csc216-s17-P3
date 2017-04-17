@@ -8,8 +8,10 @@ import java.io.Serializable;
  * @author Cameron
  * @author Caitlyn
  *
+ * @param E
+ *            generic parameter
  */
-public class LinkedList implements List, Serializable {
+public class LinkedList<E> implements List, Serializable {
 
 	private static final long serialVersionUID = 349987L;
 	private Node head;
@@ -46,7 +48,7 @@ public class LinkedList implements List, Serializable {
 	}
 
 	@Override
-	public Object get(int idx) {
+	public E get(int idx) {
 		return null;
 	}
 

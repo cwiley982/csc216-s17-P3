@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
 
+import edu.ncsu.csc216.bbtp.util.LinkedList;
+
 /**
  * Holds a lost of TestCases
  * 
+ * @author Cameron
  * @author Caitlyn
  *
  */
@@ -19,6 +22,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	private int nextTestCaseNum;
 	/** The unique id for the current list, specified by the user */
 	private String testCaseListID;
+	private LinkedList<TestCase> list;
 
 	/**
 	 * Constructs a TestCaseList with a name for the list and an id for the list
@@ -29,7 +33,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            the id for the list
 	 */
 	public TestCaseList(String name, String testCaseListID) {
-		// TODO
+		if (testCaseListID == null || testCaseListID.isEmpty())
+			throw new IllegalArgumentException();
+		list = new LinkedList<TestCase>();
+		nextTestCaseNum = 1;
+		setName(name);
+		this.testCaseListID = testCaseListID;
+		setTestCaseListID(testCaseListID);
 	}
 
 	/**
@@ -48,7 +58,12 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            name of the list
 	 */
 	public void setName(String name) {
+		if (name == null || name.isEmpty())
+			throw new IllegalArgumentException();
 		this.name = name;
+		setChanged();
+		notifyObservers(this);
+		clearChanged();
 	}
 
 	/**
@@ -57,15 +72,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the list's id
 	 */
 	public String getTestCaseListID() {
-		// TODO
-		setTestCaseListID();
-		getNextTestCaseNum();
-		incNextTestCaseNum();
 		return testCaseListID;
 	}
 
-	private void setTestCaseListID() {
-		// TODO
+	private void setTestCaseListID(String testCaseListID) {
+		if (testCaseListID == null || testCaseListID.isEmpty())
+			throw new IllegalArgumentException();
+		this.testCaseListID = testCaseListID;
 	}
 
 	private int getNextTestCaseNum() {
@@ -73,7 +86,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	}
 
 	private void incNextTestCaseNum() {
-		// TODO
+		nextTestCaseNum++;
 	}
 
 	/**
@@ -100,6 +113,15 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 */
 	public boolean addTestCase(String desc, TestingType type, Date creation, String exp, boolean tested,
 			Date lastTestDate, String act, boolean pass) {
+		TestCase tc = new TestCase((testCaseListID + "-TC" + getNextTestCaseNum()), desc, type, creation, exp, tested,
+				lastTestDate, act, pass);
+		for (int i = 0; i < list.size(); i++) {
+			int compare = tc.compareTo(list.get(i));
+			if (compare == 1) {
+				list.add(i + 1, tc);
+				return true;
+			}
+		}
 		return false;
 	}
 
