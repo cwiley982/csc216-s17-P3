@@ -22,7 +22,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	private int nextTestCaseNum;
 	/** The unique id for the current list, specified by the user */
 	private String testCaseListID;
-	private LinkedList<TestCase> list;
+	private LinkedList list;
 
 	/**
 	 * Constructs a TestCaseList with a name for the list and an id for the list
@@ -35,7 +35,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	public TestCaseList(String name, String testCaseListID) {
 		if (testCaseListID == null || testCaseListID.isEmpty())
 			throw new IllegalArgumentException();
-		list = new LinkedList<TestCase>();
+		list = new LinkedList();
 		nextTestCaseNum = 1;
 		setName(name);
 		this.testCaseListID = testCaseListID;
@@ -61,9 +61,6 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 		if (name == null || name.isEmpty())
 			throw new IllegalArgumentException();
 		this.name = name;
-		setChanged();
-		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -116,9 +113,12 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 		TestCase tc = new TestCase((testCaseListID + "-TC" + getNextTestCaseNum()), desc, type, creation, exp, tested,
 				lastTestDate, act, pass);
 		for (int i = 0; i < list.size(); i++) {
-			int compare = tc.compareTo(list.get(i));
-			if (compare == 1) {
-				list.add(i + 1, tc);
+			int compare = tc.compareTo((TestCase) list.get(i));
+			if (compare == 0)
+				return false;
+			if (compare == -1) {
+				list.add(i, tc);
+				incNextTestCaseNum();
 				return true;
 			}
 		}
@@ -133,7 +133,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the test case at the index given
 	 */
 	public TestCase getTestCaseAt(int idx) {
-		return null;
+		return (TestCase) list.get(idx);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the test case with matching id
 	 */
 	public int indexOf(String id) {
-		return -1;
+		return list.indexOf(id);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return number of test cases in the list
 	 */
 	public int size() {
-		return -1;
+		return list.size();
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return true if list is empty, false otherwise
 	 */
 	public boolean isEmpty() {
-		return false;
+		return list.isEmpty();
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return the test case removed
 	 */
 	public TestCase removeTestCaseAt(int idx) {
-		return null;
+		return (TestCase) list.remove(idx);
 	}
 
 	/**
@@ -184,13 +184,25 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 * @return true if there exists a test case with that id and it was removed
 	 */
 	public boolean removeTestCase(String testCaseID) {
-		return false;
+		TestCase tc = (TestCase) list.remove(list.indexOf(testCaseID));
+		return tc != null;
 	}
 
 	@Override
 	public Object[][] get2DArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[][] obj = new Object[list.size()][9];
+		for (int i = 0; i < list.size(); i++) {
+			obj[i][0] = ((TestCase) list.get(i)).getTestCaseID();
+			obj[i][1] = ((TestCase) list.get(i)).getDescription();
+			obj[i][2] = ((TestCase) list.get(i)).getTestingType();
+			obj[i][3] = ((TestCase) list.get(i)).getCreationDateTime();
+			obj[i][4] = ((TestCase) list.get(i)).getLastTestedDateTime();
+			obj[i][5] = ((TestCase) list.get(i)).tested();
+			obj[i][6] = ((TestCase) list.get(i)).getExpectedResults();
+			obj[i][7] = ((TestCase) list.get(i)).getActualResults();
+			obj[i][8] = ((TestCase) list.get(i)).pass();
+		}
+		return obj;
 	}
 
 	/**
@@ -202,6 +214,10 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            the objects to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-		// TODO
+		if (list.contains(observable)) {
+			setChanged();
+			notifyObservers(obj);
+			clearChanged();
+		}
 	}
 }
