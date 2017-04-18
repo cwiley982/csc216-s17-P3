@@ -33,12 +33,9 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 	 *            the id for the list
 	 */
 	public TestCaseList(String name, String testCaseListID) {
-		if (testCaseListID == null || testCaseListID.isEmpty())
-			throw new IllegalArgumentException();
 		list = new LinkedList();
 		nextTestCaseNum = 1;
 		setName(name);
-		this.testCaseListID = testCaseListID;
 		setTestCaseListID(testCaseListID);
 	}
 

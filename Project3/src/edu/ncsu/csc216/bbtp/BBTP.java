@@ -23,12 +23,18 @@ public class BBTP extends Observable implements Serializable, Observer {
 	private String filename;
 	private boolean changed;
 	private int nextTestCaseListNum;
+	private TestCaseList[] testCases;
+	private TestingTypeList testingTypes;
 
 	/**
 	 * creates a new BBTP Object and initializes state
 	 */
 	public BBTP() {
-		// empty constructor
+		testCases = new TestCaseList[3];
+		testCases[0] = new TestCaseList("New List", "abc");
+
+		testingTypes = new TestingTypeList();
+		changed = false;
 	}
 
 	/**
@@ -47,7 +53,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            boolean to set
 	 */
 	public void setChanged(boolean tf) {
-		// TODO
+		this.changed = tf;
 	}
 
 	/**
@@ -66,6 +72,8 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            the filename to set
 	 */
 	public void setFilename(String filename) {
+		if (filename == null || filename.isEmpty())
+			throw new IllegalArgumentException();
 		this.filename = filename;
 	}
 
@@ -91,9 +99,6 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the number of testCaseLists
 	 */
 	public int getNumTestCaseLists() {
-		// TODO
-		getNextTestCaseListNum();
-		incNextTestCaseListNum();
 		return numLists;
 	}
 
@@ -105,7 +110,9 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the testCaseList at the given index
 	 */
 	public TestCaseList getTestCaseList(int idx) {
-		return null;
+		if (idx < 0 || idx >= testCases.length)
+			throw new IndexOutOfBoundsException();
+		return testCases[idx];
 	}
 
 	/**
@@ -114,7 +121,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the TestingTypeList
 	 */
 	public TestingTypeList getTestingTypeList() {
-		return null;
+		return testingTypes;
 	}
 
 	/**
@@ -124,11 +131,24 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the index of the added testCaseList
 	 */
 	public int addTestCaseList() {
-		// TODO
-		if (RESIZE < numLists)
-			return 0;
-		else
-			return 1;
+		if (testCases[testCases.length - 1] != null) {
+			TestCaseList[] temp = new TestCaseList[testCases.length * RESIZE];
+			for (int i = 0; i < testCases.length; i++) {
+				temp[i] = testCases[i];
+			}
+			temp[testCases.length] = new TestCaseList("New List", "123");
+			int l = testCases.length;
+			testCases = temp;
+			return l;
+		} else {
+			for (int i = 0; i < testCases.length - 1; i++) {
+				if (testCases[i] == null) {
+					testCases[i] = new TestCaseList("New List", "lskfj");
+					return i;
+				}
+			}
+			return -1;
+		}
 	}
 
 	/**

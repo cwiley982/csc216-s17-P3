@@ -23,7 +23,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public TestingTypeList() {
 		list = new ArrayList();
-		// TODO
+		nextTestingTypeNum = 1;
 	}
 
 	/**
@@ -45,7 +45,9 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return true if the TestingType is added to the list and false otherwise
 	 */
 	public boolean addTestingType(String name, String desc) {
-		return false;
+		TestingType tt = new TestingType(("TT" + getNextTestingTypeNum()), name, desc);
+		incNextTestingTypeNum();
+		return list.add(tt);
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return the testing type at the specified index
 	 */
 	public TestingType getTestingTypeAt(int idx) {
-		return null;
+		return (TestingType) list.get(idx);
 	}
 
 	/**
@@ -67,6 +69,11 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return the index of the testing type
 	 */
 	public int indexOf(String id) {
+		for (int i = 0; i < list.size(); i++) {
+			if (((TestingType) list.get(i)).getTestingTypeID().equals(id)) {
+				return i;
+			}
+		}
 		return -1;
 	}
 
@@ -79,6 +86,11 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return the index of the testing type
 	 */
 	public int indexOfName(String name) {
+		for (int i = 0; i < list.size(); i++) {
+			if (((TestingType) list.get(i)).getName().equals(name)) {
+				return i;
+			}
+		}
 		return -1;
 	}
 
@@ -108,7 +120,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return the testing type that was removed
 	 */
 	public TestingType removeTestingTypeAt(int idx) {
-		return null;
+		return (TestingType) list.remove(idx);
 	}
 
 	/**
@@ -120,9 +132,9 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *         found)
 	 */
 	public boolean removeTestingType(String id) {
-		// TODO
-		getNextTestingTypeNum();
-		incNextTestingTypeNum();
+		if (list.remove(indexOf(id)) != null) {
+			return true;
+		}
 		return false;
 	}
 
@@ -131,13 +143,18 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	}
 
 	private void incNextTestingTypeNum() {
-		// TODO
+		nextTestingTypeNum++;
 	}
 
 	@Override
 	public Object[][] get2DArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[][] obj = new Object[list.size()][3];
+		for (int i = 0; i < list.size(); i++) {
+			obj[i][0] = ((TestingType) list.get(i)).getTestingTypeID();
+			obj[i][0] = ((TestingType) list.get(i)).getName();
+			obj[i][0] = ((TestingType) list.get(i)).getDescription();
+		}
+		return obj;
 	}
 
 	/**
@@ -149,6 +166,10 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *            the objects to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-		// TODO
+		if (list.contains(observable)) {
+			setChanged();
+			notifyObservers(obj);
+			clearChanged();
+		}
 	}
 }
