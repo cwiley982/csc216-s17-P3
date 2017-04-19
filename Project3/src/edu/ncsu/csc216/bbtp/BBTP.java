@@ -30,8 +30,9 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * creates a new BBTP Object and initializes state
 	 */
 	public BBTP() {
+		nextTestCaseListNum = 1;
 		testCases = new TestCaseList[3];
-		TestCaseList tcl = new TestCaseList("New List", "abc");
+		TestCaseList tcl = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
 		tcl.addObserver(this); // look under the Observer Pattern heading in the
 								// instructions,
 								// it explains that this is how to do that, but
