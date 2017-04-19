@@ -31,9 +31,16 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public BBTP() {
 		testCases = new TestCaseList[3];
-		testCases[0] = new TestCaseList("New List", "abc");
+		TestCaseList tcl = new TestCaseList("New List", "abc");
+		tcl.addObserver(this); // look under the Observer Pattern heading in the
+								// instructions,
+								// it explains that this is how to do that, but
+								// I don't know what
+								// it means.
+		testCases[0] = tcl;
 
 		testingTypes = new TestingTypeList();
+		testingTypes.addObserver(this);
 		changed = false;
 	}
 
@@ -131,19 +138,27 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the index of the added testCaseList
 	 */
 	public int addTestCaseList() {
-		if (testCases[testCases.length - 1] != null) {
+		if (getNextTestCaseListNum() == testCases.length) {
 			TestCaseList[] temp = new TestCaseList[testCases.length * RESIZE];
 			for (int i = 0; i < testCases.length; i++) {
 				temp[i] = testCases[i];
 			}
-			temp[testCases.length] = new TestCaseList("New List", "123");
+			TestCaseList added = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
+			added.addObserver(this);
+			notifyObservers(added);
+			temp[testCases.length] = added;
 			int l = testCases.length;
 			testCases = temp;
+			incNextTestCaseListNum();
 			return l;
 		} else {
 			for (int i = 0; i < testCases.length - 1; i++) {
 				if (testCases[i] == null) {
-					testCases[i] = new TestCaseList("New List", "lskfj");
+					TestCaseList added = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
+					added.addObserver(this);
+					notifyObservers(added);
+					testCases[i] = added;
+					incNextTestCaseListNum();
 					return i;
 				}
 			}
@@ -158,7 +173,22 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            the index to remove from
 	 */
 	public void removeTestCaseList(int idx) {
-		// TODO
+		if (idx < 0 || idx >= testCases.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (testCases[idx] != null) {
+			testCases[idx].deleteObserver(this);
+			testCases[idx] = null;
+			for (int i = idx; i < testCases.length; i++) {
+				testCases[i] = testCases[i + 1];
+				if (testCases[i + 1] == null) { // I think this will prevent the
+												// last two things in the list
+												// from being the same after
+												// removing
+					testCases[i] = null;
+				}
+			}
+		}
 	}
 
 	/**

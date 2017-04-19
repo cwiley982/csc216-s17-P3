@@ -3,6 +3,7 @@ package edu.ncsu.csc216.bbtp.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
+import java.util.Observer;
 
 import edu.ncsu.csc216.bbtp.util.LinkedList;
 
@@ -13,7 +14,7 @@ import edu.ncsu.csc216.bbtp.util.LinkedList;
  * @author Caitlyn
  *
  */
-public class TestCaseList extends Observable implements Tabular, Serializable {
+public class TestCaseList extends Observable implements Tabular, Serializable, Observer {
 
 	private static final long serialVersionUID = 98734509L;
 	/** The name of the test case list */
@@ -109,6 +110,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable {
 			Date lastTestDate, String act, boolean pass) {
 		TestCase tc = new TestCase((testCaseListID + "-TC" + getNextTestCaseNum()), desc, type, creation, exp, tested,
 				lastTestDate, act, pass);
+		tc.addObserver(this); // added this because it gave it as an example, i
+								// don't know what it means
 		for (int i = 0; i < list.size(); i++) {
 			int compare = tc.compareTo((TestCase) list.get(i));
 			if (compare == 0)

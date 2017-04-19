@@ -47,7 +47,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the list of testing types
 	 */
 	public TestCaseEditPane(TestingTypeList ttl) {
-		// TODO
+		testingTypes = ttl;
+
 	}
 
 	/**
