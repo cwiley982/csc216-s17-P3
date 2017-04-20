@@ -80,8 +80,8 @@ class TestingTypePane extends JPanel {
     }
 
     /**
-     * Initializes the view.
-     */
+	 * Initializes the view.
+	 */
     private void initView() {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEADING));
         p.add(new JLabel("Testing Type ID: ", SwingConstants.LEFT));
