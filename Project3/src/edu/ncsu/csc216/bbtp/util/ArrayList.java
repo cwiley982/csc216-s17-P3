@@ -31,7 +31,7 @@ public class ArrayList implements List, Serializable {
 	 */
 	public ArrayList(int num) {
 		list = new Object[num];
-		size = num;
+		size = 0;
 	}
 
 	/**
