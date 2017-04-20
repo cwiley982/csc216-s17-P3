@@ -19,7 +19,7 @@ public class LinkedList implements List, Serializable {
 	 * Constructs a linked list
 	 */
 	public LinkedList() {
-		front = new Node(null, null);
+		front = null;
 	}
 
 	/**
@@ -31,6 +31,9 @@ public class LinkedList implements List, Serializable {
 	 */
 	public boolean add(Object obj) {
 		if (obj == null) {
+			return false;
+		}
+		if (contains(obj)) {
 			return false;
 		}
 		if (front == null) {
@@ -78,7 +81,7 @@ public class LinkedList implements List, Serializable {
 	public boolean contains(Object obj) {
 		Node currentCheck = front;
 		for (int i = 0; i < size; i++) { // checks entire list for a duplicate
-			if (currentCheck.equals(obj)) {
+			if (currentCheck.value.equals(obj)) {
 				return true;
 			}
 			currentCheck = currentCheck.next;
@@ -150,8 +153,7 @@ public class LinkedList implements List, Serializable {
 	public class Node implements Serializable {
 		private static final long serialVersionUID = 484909840L;
 		/** Value of the node */
-		protected Object value; // not right I don't think, place holder until I
-								// figure it out
+		protected Object value;
 		private Node next;
 
 		/**
@@ -164,6 +166,9 @@ public class LinkedList implements List, Serializable {
 		 *            the next node after the one being created
 		 */
 		public Node(Object obj, Node node) {
+			if (obj == null) {
+				throw new IllegalArgumentException();
+			}
 			value = obj;
 			next = node;
 		}
