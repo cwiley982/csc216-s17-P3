@@ -70,31 +70,18 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	}
 
 	private void init() {
-		testCaseID = new JTextField("Test Case ID:");
+		testCaseID = getTestCaseID();
 		testingTypeTitle = new JLabel("Testing Type");
-		tcTestingType = new JComboBox<TestingType>();
-		for (int i = 0; i < testingTypes.size(); i++) {
-			tcTestingType.addItem(testingTypes.getTestingTypeAt(i)); // adds
-																		// testing
-																		// types
-																		// from
-																		// testing
-																		// type
-																		// list
-																		// to
-																		// the
-																		// combo
-																		// box
-		}
-		expectedResults = new JTextArea("Expected Results:");
-		actualResults = new JTextArea("Actual Results:");
-		testCaseDescription = new JTextArea("Descrption:");
+		tcTestingType = getTestingType();
+		expectedResults = getExpectedResults();
+		actualResults = getActualResults();
+		testCaseDescription = getTestCaseDescription();
 		testCreationDate = getTestCreationDateSpinner();
 		testLastTestedDate = getTestLastTestedDateSpinner();
 		creationDateTitle = new JLabel("Test Creation Date & Time:");
 		lastTestedDateTitle = new JLabel("Last Tested Date & Time:");
-		tested = new JCheckBox("Tested?");
-		pass = new JCheckBox("Pass?");
+		tested = tested();
+		pass = pass();
 	}
 
 	/**
@@ -152,6 +139,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the test case's id
 	 */
 	protected JTextField getTestCaseID() {
+		if (testCaseID == null) {
+			testCaseID = new JTextField("Test Case ID:");
+		}
 		return testCaseID;
 	}
 
@@ -161,6 +151,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return test case's description
 	 */
 	protected JTextArea getTestCaseDescription() {
+		if (testCaseDescription == null) {
+			testCaseDescription = new JTextArea("Descrption:");
+		}
 		return testCaseDescription;
 	}
 
@@ -170,6 +163,12 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return combo box with all testing types
 	 */
 	protected JComboBox<TestingType> getTestingType() {
+		if (tcTestingType == null) {
+			tcTestingType = new JComboBox<TestingType>();
+			for (int i = 0; i < testingTypes.size(); i++) {
+				tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
+			}
+		}
 		return tcTestingType;
 	}
 
@@ -179,6 +178,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return expected results in a JTextArea
 	 */
 	protected JTextArea getExpectedResults() {
+		if (expectedResults == null) {
+			expectedResults = new JTextArea("Expected Results:");
+		}
 		return expectedResults;
 	}
 
@@ -188,6 +190,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return actual results in a JTextArea
 	 */
 	protected JTextArea getActualResults() {
+		if (actualResults == null) {
+			actualResults = new JTextArea("Actual Results:");
+		}
 		return actualResults;
 	}
 
@@ -197,6 +202,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return checkbox for if the test passed
 	 */
 	protected JCheckBox pass() {
+		if (pass == null) {
+			pass = new JCheckBox("Pass?");
+		}
 		return pass;
 	}
 
@@ -206,7 +214,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return checkbox for if the test has been tested
 	 */
 	protected JCheckBox tested() {
-		tested = new JCheckBox("Tested?");
+		if (tested == null) {
+			tested = new JCheckBox("Tested?");
+		}
 		return tested;
 	}
 

@@ -3,9 +3,16 @@
  */
 package edu.ncsu.csc216.bbtp.ui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.event.DocumentListener;
 
 /**
