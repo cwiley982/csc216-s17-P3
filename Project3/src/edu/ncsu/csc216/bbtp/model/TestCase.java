@@ -59,7 +59,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		setPass(pass);
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -89,8 +88,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 			throw new IllegalArgumentException();
 		this.description = description;
 		setChanged();
-		notifyObservers(this);
-		clearChanged(); // potential point of failure, can be removed.
+		notifyObservers(this); // potential point of failure, can be removed.
 	}
 
 	/**
@@ -121,7 +119,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.expectedResults = expectedResults;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -152,7 +149,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.actualResults = actualResults;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -176,7 +172,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.creationDateTime = creationDateTime;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -200,7 +195,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.lastTestedDateTime = lastTestedDateTime;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -222,7 +216,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.testedStatus = tf;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -244,7 +237,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.pass = tf;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -259,7 +251,6 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		this.testingType = tt;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -283,6 +274,9 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	private void setTestCaseID(String id) {
 		if (id == null || id.isEmpty())
 			throw new IllegalArgumentException();
+		this.testCaseID = id;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	@Override

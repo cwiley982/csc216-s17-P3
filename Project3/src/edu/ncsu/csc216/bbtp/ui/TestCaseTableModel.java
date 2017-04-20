@@ -1,6 +1,11 @@
 package edu.ncsu.csc216.bbtp.ui;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.swing.table.AbstractTableModel;
+
+import edu.ncsu.csc216.bbtp.model.TestingType;
 
 /**
  * Contains the data displayed in the TestCaseListPane's JTable
@@ -8,11 +13,12 @@ import java.io.Serializable;
  * @author Caitlyn
  *
  */
-public class TestCaseTableModel implements Serializable {
+public class TestCaseTableModel extends AbstractTableModel implements Serializable {
 
 	private static final long serialVersionUID = 5954551753060998701L;
 	/** Array of the names of each column in the table */
-	private String[] colNames;
+	private String[] colNames = { "ID", "Description", "Test Type", "Creation Date", "Last Tested Date", "Tested?",
+			"Expected Results", "Actual Results", "Pass" };
 	/** 2D array containing all the data in the table */
 	private Object[][] data;
 
@@ -24,7 +30,10 @@ public class TestCaseTableModel implements Serializable {
 	 *            the 2D array with test case data
 	 */
 	public TestCaseTableModel(Object[][] testCases) {
-		// TODO
+		if (testCases == null) {
+			throw new IllegalArgumentException();
+		}
+		data = testCases;
 	}
 
 	/**
@@ -33,7 +42,7 @@ public class TestCaseTableModel implements Serializable {
 	 * @return number of rows
 	 */
 	public int getRowCount() {
-		return -1;
+		return data.length;
 	}
 
 	/**
@@ -42,16 +51,21 @@ public class TestCaseTableModel implements Serializable {
 	 * @return number of columns
 	 */
 	public int getColumnCount() {
-		return -1;
+		return colNames.length;
 	}
 
 	/**
 	 * Gets the name of the column
 	 * 
+	 * @param index
+	 *            the index to get the name of the column of
 	 * @return name of the column
 	 */
-	public String getColumnName() {
-		return "";
+	public String getColumnName(int index) {
+		if (index < 0 || index >= colNames.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		return colNames[index];
 	}
 
 	/**
@@ -64,7 +78,10 @@ public class TestCaseTableModel implements Serializable {
 	 * @return data at position with row and column equal to given values
 	 */
 	public Object getValueAt(int row, int col) {
-		return null;
+		if (row < 0 || row >= data.length || col < 0 || col > colNames.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		return data[row][col];
 	}
 
 	/**
@@ -78,9 +95,14 @@ public class TestCaseTableModel implements Serializable {
 	 *            column to consider
 	 */
 	public void setValueAt(Object obj, int row, int col) {
-		// TODO
-		if (colNames != null && data != null)
-			getTestCaseRowData(3);
+		if (obj == null) {
+			throw new IllegalArgumentException();
+		}
+		if (row < 0 || row >= data.length || col < 0 || col > colNames.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		data[row][col] = obj;
+
 	}
 
 	/**
@@ -91,7 +113,21 @@ public class TestCaseTableModel implements Serializable {
 	 * @return TestCaseData object containing the test case's info
 	 */
 	public TestCaseData getTestCaseRowData(int row) {
-		return null;
+		if (row < 0 || row > data.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		String id = (String) data[row][0];
+		String desc = (String) data[row][1];
+		TestingType testType = (TestingType) data[row][2];
+		Date created = (Date) data[row][3];
+		Date lastTested = (Date) data[row][4];
+		boolean tested = (boolean) data[row][5];
+		String exp = (String) data[row][6];
+		String act = (String) data[row][7];
+		boolean pass = (boolean) data[row][8];
+		
+		TestCaseData tcd = new TestCaseData(id, desc, testType, created, lastTested, tested, exp, act, pass);
+		return tcd;
 	}
 
 	/**
@@ -104,7 +140,13 @@ public class TestCaseTableModel implements Serializable {
 	 *            the TestCaseData object to get the data from
 	 */
 	public void setTaskRowData(int row, TestCaseData data) {
-		// TODO
+		if (row < 0 || row > this.data.length) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (data == null) {
+			throw new IllegalArgumentException();
+		}
+		this.data[row] = data.getDataArray();
 	}
 
 }

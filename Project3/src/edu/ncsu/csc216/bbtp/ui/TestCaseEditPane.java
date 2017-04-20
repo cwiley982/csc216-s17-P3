@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
@@ -33,7 +34,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	private JTextArea expectedResults;
 	private JTextArea actualResults;
 	private JTextArea testCaseDescription;
+	private JLabel creationDateTitle;
 	private JSpinner testCreationDate;
+	private JLabel lastTestedDateTitle;
 	private JSpinner testLastTestedDate;
 	private JCheckBox tested;
 	private JCheckBox pass;
@@ -48,7 +51,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 */
 	public TestCaseEditPane(TestingTypeList ttl) {
 		testingTypes = ttl;
-
 	}
 
 	/**
@@ -61,12 +63,24 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            list of testing types to allow user to choose from
 	 */
 	public TestCaseEditPane(TestCaseData tcd, TestingTypeList ttl) {
-
+		this(ttl);
+		setTestCaseData(tcd);
 		// TODO
 	}
 
 	private void init() {
-		// TODO
+		testCaseID = new JTextField("Test Case ID:");
+		tcTestingType = new JComboBox<TestingType>("Testing Type"); // come back
+																	// to me
+		expectedResults = new JTextArea("Expected Results:");
+		actualResults = new JTextArea("Actual Results:");
+		testCaseDescription = new JTextArea("Descrption:");
+		testCreationDate = new JSpinner(); // need bounds?
+		testLastTestedDate = new JSpinner();
+		creationDateTitle = new JLabel("Test Creation Date & Time:");
+		lastTestedDateTitle = new JLabel("Last Tested Date & Time:");
+		tested = new JCheckBox("Tested?");
+		pass = new JCheckBox("Pass?");
 	}
 
 	/**
@@ -82,9 +96,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the date created as a JSpinner
 	 */
 	protected JSpinner getTestCreationDateSpinner() {
-		// TODO
-		init();
-		initView();
 		return testCreationDate;
 	}
 
@@ -103,7 +114,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the date the test was created as a Date
 	 */
 	protected Date getTestCreationDate() {
-		return null;
+		return (Date) testCreationDate.getValue();
 	}
 
 	/**
@@ -112,7 +123,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the date the test was last tested as a Date
 	 */
 	protected Date getLastTestedDate() {
-		return null;
+		return (Date) testLastTestedDate.getValue();
 	}
 
 	/**
@@ -166,7 +177,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return checkbox for if the test passed
 	 */
 	protected JCheckBox pass() {
-		return null;
+		return pass;
 	}
 
 	/**
@@ -175,7 +186,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return checkbox for if the test has been tested
 	 */
 	protected JCheckBox tested() {
-		return null;
+		return tested;
 	}
 
 	/**
@@ -185,7 +196,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the date to set the creation date to
 	 */
 	protected void setCreationDateTime(Date date) {
-		// TODO
+		testCreationDate.setValue(date);
 	}
 
 	/**
@@ -195,7 +206,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the date to set the last tested date to
 	 */
 	protected void setLastTestedDateTime(Date date) {
-		// TODO
+		testLastTestedDate.setValue(date);
 	}
 
 	/**
@@ -204,12 +215,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return true if a test is being added, false otherwise
 	 */
 	protected boolean isAddMode() {
-		// TODO
-		if (pass != null && tested != null && testingTypes != null)
-			return true;
-		if (add && edit)
-			return true;
-		return false;
+		return add;
 	}
 
 	/**
@@ -218,21 +224,21 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return true if a test is being edited, false otherwise
 	 */
 	protected boolean isEditMode() {
-		return false;
+		return edit;
 	}
 
 	/**
 	 * Enables the panel to be able to add a test case
 	 */
 	protected void enableAdd() {
-		// TODO
+		add = true;
 	}
 
 	/**
 	 * Disables the panel being able to add test cases
 	 */
 	protected void disableAdd() {
-		// TODO
+		add = false;
 	}
 
 	/**
@@ -242,33 +248,57 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            test case data to update test with
 	 */
 	protected void enableEdit(TestCaseData tcd) {
-		// TODO
+		edit = true;
+		setTestCaseData(tcd);
 	}
 
 	/**
 	 * Disables the panel from edit mode
 	 */
 	protected void disableEdit() {
-		// TODO
+		edit = false;
 	}
 
 	/**
-	 * Tells of the fields are not empty
+	 * Tells if the fields are not empty
 	 * 
 	 * @return true if all fields are not empty
 	 */
 	protected boolean fieldsNotEmpty() {
-		return false;
+		if (testCaseID.getText().equals("")) {
+			return false;
+		} else if (testCaseDescription.getText().equals("")) {
+			return false;
+		} else if (tcTestingType.getSelectedIndex() == -1) {
+			return false;
+		} else if (expectedResults.getText().equals("")) {
+			return false;
+		} else if (actualResults.getText().equals("")) {
+			return false;
+		} else if (testCreationDate.getValue() == null) {
+			return false;
+		} else if (testLastTestedDate.getValue() == null) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
-	 * Sets the test case data for a test
+	 * Fills the fields with the data in the TestCaseData object
 	 * 
 	 * @param tcd
 	 *            the test case data to set
 	 */
 	protected void setTestCaseData(TestCaseData tcd) {
-		// TODO
+		testCaseID.setText(tcd.getTestCaseID());
+		testCaseDescription.setText(tcd.getDescription());
+		tcTestingType.setSelectedIndex(testingTypes.indexOf(tcd.getTestingType().getTestingTypeID()));
+		testCreationDate.setValue(tcd.getCreationDateTime());
+		testLastTestedDate.setValue(tcd.getLastTestedDateTime());
+		tested.setSelected(tcd.tested());
+		expectedResults.setText(tcd.getExpectedResults());
+		actualResults.setText(tcd.getActualResults());
+		pass.setSelected(tcd.pass());
 	}
 
 	/**
@@ -292,7 +322,15 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * Clears all fields so no data is shown
 	 */
 	protected void clearFields() {
-		// TODO
+		testCaseID.setText("");
+		testCaseDescription.setText("");
+		tcTestingType.setSelectedIndex(-1);
+		testCreationDate.setValue(null); // don't know if this is right
+		testLastTestedDate.setValue(null);
+		tested.setSelected(false);
+		expectedResults.setText("");
+		actualResults.setText("");
+		pass.setSelected(false);
 	}
 
 	/**
@@ -301,7 +339,18 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return TestCaseData object holding data from all fields
 	 */
 	protected TestCaseData getFields() {
-		return null;
+		String id = testCaseID.getText();
+		String desc = testCaseDescription.getText();
+		TestingType tt = (TestingType) tcTestingType.getSelectedItem();
+		Date created = (Date) testCreationDate.getValue();
+		Date lastTested = (Date) testLastTestedDate.getValue();
+		boolean wasTested = tested.isSelected();
+		String exp = expectedResults.getText();
+		String act = actualResults.getText();
+		boolean passed = pass.isSelected();
+		TestCaseData tcd = new TestCaseData(id, desc, tt, created, lastTested, wasTested, exp, act, passed);
+
+		return tcd;
 	}
 
 	/**
@@ -313,6 +362,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the object being changed
 	 */
 	public void update(Observable o, Object ol) {
-		// TODO
+		fillFields();
 	}
 }

@@ -2,6 +2,7 @@ package edu.ncsu.csc216.bbtp.model;
 
 import java.io.Serializable;
 import java.util.Observable;
+import java.util.Observer;
 
 import edu.ncsu.csc216.bbtp.util.ArrayList;
 
@@ -11,7 +12,7 @@ import edu.ncsu.csc216.bbtp.util.ArrayList;
  * @author Caitlyn
  *
  */
-public class TestingTypeList extends Observable implements Tabular, Serializable {
+public class TestingTypeList extends Observable implements Tabular, Serializable, Observer {
 
 	private static final long serialVersionUID = 984509L;
 	private String name = "Testing Types";
@@ -24,6 +25,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	public TestingTypeList() {
 		list = new ArrayList();
 		nextTestingTypeNum = 1;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -47,7 +50,13 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	public boolean addTestingType(String name, String desc) {
 		TestingType tt = new TestingType(("TT" + getNextTestingTypeNum()), name, desc);
 		incNextTestingTypeNum();
-		return list.add(tt);
+		if (list.add(tt)) {
+			setChanged();
+			notifyObservers(this);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -120,7 +129,10 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return the testing type that was removed
 	 */
 	public TestingType removeTestingTypeAt(int idx) {
-		return (TestingType) list.remove(idx);
+		TestingType tc = (TestingType) list.remove(idx);
+		setChanged();
+		notifyObservers(this);
+		return tc;
 	}
 
 	/**
@@ -133,6 +145,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public boolean removeTestingType(String id) {
 		if (list.remove(indexOf(id)) != null) {
+			setChanged();
+			notifyObservers(this);
 			return true;
 		}
 		return false;
@@ -144,6 +158,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 
 	private void incNextTestingTypeNum() {
 		nextTestingTypeNum++;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	@Override
@@ -167,9 +183,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public void update(Observable observable, Object obj) {
 		if (list.contains(observable)) {
-			setChanged();
 			notifyObservers(obj);
-			clearChanged();
 		}
 	}
 }

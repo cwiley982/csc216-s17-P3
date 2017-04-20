@@ -1,11 +1,17 @@
 package edu.ncsu.csc216.bbtp;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
 import edu.ncsu.csc216.bbtp.model.TestingTypeList;
+import edu.ncsu.csc216.bbtp.util.ArrayList;
 
 /**
  * The controller class, takes information from the other classes and sends it
@@ -193,25 +199,93 @@ public class BBTP extends Observable implements Serializable, Observer {
 	}
 
 	/**
-	 * saves the data to a file
+	 * Saves the TestingTypeList and the array of TestCaseLists to the given
+	 * file using object serialization.
 	 * 
-	 * @param filename
-	 *            the file to save to
-	 * @return true or false
+	 * @param fname
+	 *            filename to save BBTP information to.
+	 * @return true is saved successfully
 	 */
-	public boolean saveDataFile(String filename) {
-		return false;
+	public boolean saveDataFile(String fname) {
+		if (fname == null || fname.trim().equals("")) {
+			System.err.println("Invalid filename" + fname);
+			return false;
+		} else {
+			try {
+				FileOutputStream fileOut = new FileOutputStream(fname);
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				for (int i = 0; i < numLists; i++) {
+					out.writeObject(testCases[i]);
+				}
+				out.writeObject(testingTypes);
+				out.writeObject(filename);
+				out.writeInt(nextTestCaseListNum);
+				changed = false;
+				out.close();
+				fileOut.close();
+				return true;
+			} catch (IOException e) {
+				System.err.println("An error occurred while saving file " + fname);
+				e.printStackTrace(System.err);
+				return false;
+			}
+		}
 	}
 
 	/**
-	 * opens data from a file
+	 * Opens a data file with the given name and creates the data structures
+	 * from the serialized objects in the file.
 	 * 
-	 * @param filename
-	 *            the file to pull data from
-	 * @return true or false
+	 * @param fname
+	 *            filename to create BBTP information from.
+	 * @return true is opened successfully
 	 */
-	public boolean openDataFile(String filename) {
-		return false;
+	public boolean openDataFile(String fname) {
+		if (changed) {
+			saveDataFile(filename);
+		}
+		try {
+			FileInputStream fileIn = new FileInputStream(fname);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			ArrayList temp = new ArrayList();
+			Object tl = in.readObject();
+			while (tl instanceof TestCaseList) {
+				TestCaseList l = (TestCaseList) tl;
+				l.addObserver(this);
+				temp.add(l);
+				tl = in.readObject();
+			}
+			testCases = new TestCaseList[temp.size()];
+			for (int i = 0; i < temp.size(); i++) {
+				testCases[i] = (TestCaseList) temp.get(i);
+			}
+			numLists = temp.size();
+			testingTypes = (TestingTypeList) tl;
+			testingTypes.addObserver(this);
+			filename = (String) in.readObject();
+			nextTestCaseListNum = (int) in.readInt();
+			for (int i = 0; i < numLists; i++) {
+				TestCaseList list = testCases[i];
+				for (int j = 0; j < list.size(); j++) {
+					list.getTestCaseAt(j).addObserver(list);
+				}
+			}
+			for (int i = 0; i < testingTypes.size(); i++) {
+				testingTypes.getTestingTypeAt(i).addObserver(testingTypes);
+			}
+			changed = false;
+			in.close();
+			fileIn.close();
+			return true;
+		} catch (IOException e) {
+			System.err.println("An error occurred while reading file " + fname);
+			e.printStackTrace(System.err);
+			return false;
+		} catch (ClassNotFoundException c) {
+			System.err.println("Error reconstructing BBTP from file " + fname);
+			c.printStackTrace(System.err);
+			return false;
+		}
 	}
 
 	/**
@@ -223,6 +297,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            changed object
 	 */
 	public void update(Observable o, Object arg) {
-		// TODO
+		setChanged(true);
+		notifyObservers(arg);
 	}
 }

@@ -31,6 +31,8 @@ public class TestingType extends Observable implements Serializable, Comparable<
 		setTestingTypeID(id);
 		setName(name);
 		setDescription(desc);
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -54,7 +56,6 @@ public class TestingType extends Observable implements Serializable, Comparable<
 		this.name = name;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -76,7 +77,6 @@ public class TestingType extends Observable implements Serializable, Comparable<
 		this.description = description;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	/**
@@ -100,7 +100,6 @@ public class TestingType extends Observable implements Serializable, Comparable<
 		this.testingTypeID = testingTypeID;
 		setChanged();
 		notifyObservers(this);
-		clearChanged();
 	}
 
 	@Override

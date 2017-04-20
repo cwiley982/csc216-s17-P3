@@ -38,6 +38,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		nextTestCaseNum = 1;
 		setName(name);
 		setTestCaseListID(testCaseListID);
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -59,6 +61,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		if (name == null || name.isEmpty())
 			throw new IllegalArgumentException();
 		this.name = name;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -74,6 +78,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		if (testCaseListID == null || testCaseListID.isEmpty())
 			throw new IllegalArgumentException();
 		this.testCaseListID = testCaseListID;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	private int getNextTestCaseNum() {
@@ -82,6 +88,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 
 	private void incNextTestCaseNum() {
 		nextTestCaseNum++;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -119,6 +127,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			if (compare == -1) {
 				list.add(i, tc);
 				incNextTestCaseNum();
+				setChanged();
+				notifyObservers(this);
 				return true;
 			}
 		}
@@ -173,7 +183,10 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 * @return the test case removed
 	 */
 	public TestCase removeTestCaseAt(int idx) {
-		return (TestCase) list.remove(idx);
+		TestCase tc = (TestCase) list.remove(idx);
+		setChanged();
+		notifyObservers(this);
+		return tc;
 	}
 
 	/**
@@ -185,6 +198,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public boolean removeTestCase(String testCaseID) {
 		TestCase tc = (TestCase) list.remove(list.indexOf(testCaseID));
+		setChanged();
+		notifyObservers(this);
 		return tc != null;
 	}
 
@@ -215,9 +230,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public void update(Observable observable, Object obj) {
 		if (list.contains(observable)) {
-			setChanged();
 			notifyObservers(obj);
-			clearChanged();
 		}
 	}
 }

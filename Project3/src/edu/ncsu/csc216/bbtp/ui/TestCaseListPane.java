@@ -1,9 +1,11 @@
 package edu.ncsu.csc216.bbtp.ui;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
@@ -21,7 +23,7 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	private static final long serialVersionUID = -2210716111020406799L;
 	private TestCaseList testCases;
 	private JTable table;
-	private int[] colWidths;
+	private int[] colWidths = { 50, 200, 50, 100, 100, 50, 50, 50, 50 };
 	private TestCaseTableModel tctm;
 
 	/**
@@ -31,7 +33,14 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 *            the list of test cases to populate the pane with
 	 */
 	public TestCaseListPane(TestCaseList list) {
-		// TODO Auto-generated constructor stub
+		super();
+		if (list == null) {
+			throw new IllegalArgumentException();
+		}
+		testCases = list;
+		this.testCases.addObserver(this);
+		tctm = new TestCaseTableModel(testCases.get2DArray());
+		initView();
 	}
 
 	/**
@@ -58,16 +67,20 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 * TestCaseTableModel
 	 */
 	private void initView() {
-		// TODO
+		table = new JTable(tctm);
+		for (int i = 0; i < colWidths.length; i++) {
+			table.getColumnModel().getColumn(i).setPreferredWidth(colWidths[i]);
+		}
+		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		table.setFillsViewportHeight(false);
+		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
 	/**
 	 * Clears the current data
 	 */
 	public void clearSelection() {
-		// TODO
-		if (colWidths != null && testCases != null)
-			initView();
+		table.clearSelection();
 	}
 
 	/**
@@ -79,7 +92,22 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 *            the object (observer) to be notified of the change
 	 */
 	public void update(Observable observable, Object obj) {
-		// TODO
+		if (observable instanceof TestCaseList) {
+			TestCaseList tcl = (TestCaseList) observable;
+			// If there is a different number of rows, create a new
+			// TestingTypeTableModel.
+			if (tcl.size() != tctm.getRowCount()) {
+				tctm = new TestCaseTableModel(tcl.get2DArray());
+				table.setModel(tctm);
+			} else {
+				// Otherwise, just update the values directly.
+				Object[][] arr = tcl.get2DArray();
+				for (int i = 0; i < arr.length; i++) {
+					for (int j = 0; j < tctm.getColumnCount(); j++) {
+						tctm.setValueAt(arr[i][j], i, j);
+					}
+				}
+			}
+		}
 	}
-
 }
