@@ -165,13 +165,6 @@ public class BBTPTest {
 		assertFalse(bbtp.saveDataFile(""));
 		assertFalse(bbtp.saveDataFile(null));
 		assertTrue(bbtp.saveDataFile("test-files/testing_save_method"));
-	}
-
-	/**
-	 * Tests reading in a file and creating a bbtp object with the data read in
-	 */
-	@Test
-	public void testOpenDataFile() {
-		assertTrue(bbtp.openDataFile("test-files/sample_file"));
+		assertTrue(bbtp.openDataFile("test-files/testing_save_method"));
 	}
 }

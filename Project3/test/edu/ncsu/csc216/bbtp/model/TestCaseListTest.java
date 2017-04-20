@@ -78,8 +78,8 @@ public class TestCaseListTest {
 	@Test
 	public void testAddTestCase() {
 		TestingType tt = new TestingType("id", "type1", "desc");
-		Date created = new Date();
-		Date lastTested = new Date();
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
 		assertTrue(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
 		assertFalse(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
 	}

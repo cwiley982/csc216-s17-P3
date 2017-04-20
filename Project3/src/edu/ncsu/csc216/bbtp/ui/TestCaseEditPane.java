@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 
 import edu.ncsu.csc216.bbtp.model.TestingType;
 import edu.ncsu.csc216.bbtp.model.TestingTypeList;
@@ -88,8 +89,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		expectedResults = new JTextArea("Expected Results:");
 		actualResults = new JTextArea("Actual Results:");
 		testCaseDescription = new JTextArea("Descrption:");
-		testCreationDate = new JSpinner(); // need bounds?
-		testLastTestedDate = new JSpinner();
+		testCreationDate = getTestCreationDateSpinner();
+		testLastTestedDate = getTestLastTestedDateSpinner();
 		creationDateTitle = new JLabel("Test Creation Date & Time:");
 		lastTestedDateTitle = new JLabel("Last Tested Date & Time:");
 		tested = new JCheckBox("Tested?");
@@ -109,6 +110,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the date created as a JSpinner
 	 */
 	protected JSpinner getTestCreationDateSpinner() {
+		if (testCreationDate == null) {
+			testCreationDate = new JSpinner(new SpinnerDateModel());
+		}
 		return testCreationDate;
 	}
 
@@ -118,6 +122,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return the last test date as a JSpinner
 	 */
 	protected JSpinner getTestLastTestedDateSpinner() {
+		if (testLastTestedDate == null) {
+			testLastTestedDate = new JSpinner(new SpinnerDateModel());
+		}
 		return testLastTestedDate;
 	}
 
@@ -199,6 +206,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return checkbox for if the test has been tested
 	 */
 	protected JCheckBox tested() {
+		tested = new JCheckBox("Tested?");
 		return tested;
 	}
 

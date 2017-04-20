@@ -19,7 +19,7 @@ public class ArrayList implements List, Serializable {
 	 * Constructs an empty array list and initializes its state
 	 */
 	public ArrayList() {
-		list = new Object[0];
+		list = new Object[5];
 		size = 0;
 	}
 
