@@ -312,9 +312,11 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 */
 	protected void enableAdd() {
 		if (!isAddMode()) {
+			data = null;
 			add = true;
 			edit = false;
 			clearFields();
+			fillFields();
 		}
 	}
 
@@ -434,7 +436,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 
 		if (isAddMode() || isEditMode()) {
 			testCaseID.setEditable(true);
-			tcTestingType.setEditable(true);
+			tcTestingType.setEnabled(true);
 			expectedResults.setEditable(true);
 			actualResults.setEditable(true);
 			testCaseDescription.setEditable(true);

@@ -68,6 +68,7 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 */
 	private void initView() {
 		table = new JTable(tctm);
+		table.setVisible(true);
 		for (int i = 0; i < colWidths.length; i++) {
 			table.getColumnModel().getColumn(i).setPreferredWidth(colWidths[i]);
 		}
