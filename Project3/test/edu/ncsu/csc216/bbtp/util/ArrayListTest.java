@@ -1,4 +1,4 @@
-package util;
+package edu.ncsu.csc216.bbtp.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

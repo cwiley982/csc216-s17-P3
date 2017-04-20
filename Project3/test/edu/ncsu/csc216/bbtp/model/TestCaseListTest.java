@@ -84,4 +84,48 @@ public class TestCaseListTest {
 		assertFalse(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
 	}
 
+	@Test
+	public void testGetTestCaseAt() {
+		TestingType tt = new TestingType("id", "type1", "desc");
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
+		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
+		// TestCase tc = new TestCase("New List-TC1", "desc", tt, created,
+		// "exp", false, lastTested, "act", false);
+		assertEquals("New List-TC1", tcl.getTestCaseAt(0).getTestCaseID());
+	}
+
+	@Test
+	public void testIsEmpty() {
+		assertTrue(tcl.isEmpty());
+	}
+
+	@Test
+	public void testRemoveInt() {
+		TestingType tt = new TestingType("id", "type1", "desc");
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
+		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
+		assertEquals("New List-TC1", tcl.removeTestCaseAt(0));
+	}
+
+	@Test
+	public void testRemoveByID() {
+		TestingType tt = new TestingType("id", "type1", "desc");
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
+		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
+		tcl.removeTestCase("New List-TC1");
+		assertTrue(tcl.isEmpty());
+	}
+
+	@Test
+	public void testGet2DArray() {
+		TestingType tt = new TestingType("id", "type1", "desc");
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
+		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
+		assertEquals("desc", tcl.get2DArray()[0][2]);
+	}
+
 }
