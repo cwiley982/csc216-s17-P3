@@ -30,6 +30,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	private static final long serialVersionUID = 5479139338455751629L;
 	private TestingTypeList testingTypes;
 	private JTextField testCaseID;
+	private JLabel testingTypeTitle;
 	private JComboBox<TestingType> tcTestingType;
 	private JTextArea expectedResults;
 	private JTextArea actualResults;
@@ -65,13 +66,25 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	public TestCaseEditPane(TestCaseData tcd, TestingTypeList ttl) {
 		this(ttl);
 		setTestCaseData(tcd);
-		// TODO
 	}
 
 	private void init() {
 		testCaseID = new JTextField("Test Case ID:");
-		tcTestingType = new JComboBox<TestingType>("Testing Type"); // come back
-																	// to me
+		testingTypeTitle = new JLabel("Testing Type");
+		tcTestingType = new JComboBox<TestingType>();
+		for (int i = 0; i < testingTypes.size(); i++) {
+			tcTestingType.addItem(testingTypes.getTestingTypeAt(i)); // adds
+																		// testing
+																		// types
+																		// from
+																		// testing
+																		// type
+																		// list
+																		// to
+																		// the
+																		// combo
+																		// box
+		}
 		expectedResults = new JTextArea("Expected Results:");
 		actualResults = new JTextArea("Actual Results:");
 		testCaseDescription = new JTextArea("Descrption:");
@@ -87,7 +100,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * Initializes the view
 	 */
 	private void initView() {
-		// TODO
+		// TODO put everything into a pretty panel
 	}
 
 	/**

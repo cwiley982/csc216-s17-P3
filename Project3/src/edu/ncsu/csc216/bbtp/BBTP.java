@@ -24,7 +24,7 @@ import edu.ncsu.csc216.bbtp.util.ArrayList;
 public class BBTP extends Observable implements Serializable, Observer {
 
 	private static final long serialVersionUID = 34992L;
-	private static final int RESIZE = 0;
+	private static final int RESIZE = 3;
 	private int numLists;
 	private String filename;
 	private boolean changed;
@@ -39,6 +39,8 @@ public class BBTP extends Observable implements Serializable, Observer {
 		nextTestCaseListNum = 1;
 		testCases = new TestCaseList[3];
 		TestCaseList tcl = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
+		numLists = 1;
+		incNextTestCaseListNum();
 		tcl.addObserver(this); // look under the Observer Pattern heading in the
 								// instructions,
 								// it explains that this is how to do that, but
@@ -145,7 +147,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the index of the added testCaseList
 	 */
 	public int addTestCaseList() {
-		if (getNextTestCaseListNum() == testCases.length) {
+		if (getNextTestCaseListNum() > testCases.length) {
 			TestCaseList[] temp = new TestCaseList[testCases.length * RESIZE];
 			for (int i = 0; i < testCases.length; i++) {
 				temp[i] = testCases[i];
@@ -157,15 +159,17 @@ public class BBTP extends Observable implements Serializable, Observer {
 			int l = testCases.length;
 			testCases = temp;
 			incNextTestCaseListNum();
+			numLists++;
 			return l;
 		} else {
-			for (int i = 0; i < testCases.length - 1; i++) {
+			for (int i = 0; i < testCases.length; i++) {
 				if (testCases[i] == null) {
 					TestCaseList added = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
 					added.addObserver(this);
 					notifyObservers(added);
 					testCases[i] = added;
 					incNextTestCaseListNum();
+					numLists++;
 					return i;
 				}
 			}
@@ -180,22 +184,18 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            the index to remove from
 	 */
 	public void removeTestCaseList(int idx) {
-		if (idx < 0 || idx >= testCases.length) {
+		// do we need to change their IDs too so a number isn't skipped??
+		if (idx < 0 || idx >= numLists) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (testCases[idx] != null) {
 			testCases[idx].deleteObserver(this);
-			testCases[idx] = null;
-			for (int i = idx; i < testCases.length; i++) {
+			for (int i = idx; i < numLists - 1; i++) {
 				testCases[i] = testCases[i + 1];
-				if (testCases[i + 1] == null) { // I think this will prevent the
-												// last two things in the list
-												// from being the same after
-												// removing
-					testCases[i] = null;
-				}
 			}
+			testCases[numLists - 1] = null;
 		}
+		numLists--;
 	}
 
 	/**
