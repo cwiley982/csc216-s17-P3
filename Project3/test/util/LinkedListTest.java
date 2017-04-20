@@ -1,6 +1,7 @@
 package util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -8,10 +9,19 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.bbtp.util.LinkedList;
 
+/**
+ * Tests the functionality of the linked list class
+ * 
+ * @author Caitlyn
+ *
+ */
 public class LinkedListTest {
 
 	LinkedList ll = new LinkedList();
 
+	/**
+	 * Sets up a linked list with 10 objects to be used in testing
+	 */
 	@Before
     public void setup() {
 		ll = new LinkedList();
@@ -32,17 +42,21 @@ public class LinkedListTest {
      */
     @Test
     public void testAdd() {
-        ll.add(10, "hi");
+		assertFalse(ll.add(null));
+		// add to size
+		ll.add(10, "hi");
         assertEquals(11, ll.size());
+		// add to front
         ll.add(0, "hello");
         assertEquals(12, ll.size());
         assertEquals("hello", ll.get(0));
+		// add to middle
         ll.add(4, "hola");
         assertEquals(13, ll.size());
         assertEquals("hola", ll.get(4));
 
         try {
-			ll.add(4, new String("hola"));
+			ll.add(4, "hola");
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals(13, ll.size());
@@ -58,7 +72,7 @@ public class LinkedListTest {
         try {
             ll.add(4, null);
             fail();
-        } catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
             assertEquals(13, ll.size());
         }
 
@@ -105,5 +119,22 @@ public class LinkedListTest {
         ll.remove(0);
         assertEquals("b", ll.get(0));
     }
+
+	/**
+	 * Tests getting the index of an object
+	 */
+	@Test
+	public void testIndexOf() {
+		assertEquals(3, ll.indexOf("hi3"));
+		assertEquals(-1, ll.indexOf("helllooooo"));
+	}
+
+	/**
+	 * Tests telling whether the list is empty or not
+	 */
+	@Test
+	public void testIsEmpty() {
+		assertFalse(ll.isEmpty());
+	}
 
 }
