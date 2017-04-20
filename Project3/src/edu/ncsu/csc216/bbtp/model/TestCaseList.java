@@ -120,16 +120,24 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 				lastTestDate, act, pass);
 		tc.addObserver(this); // added this because it gave it as an example, i
 								// don't know what it means
-		for (int i = 0; i < list.size(); i++) {
-			int compare = tc.compareTo((TestCase) list.get(i));
-			if (compare == 0)
-				return false;
-			if (compare == -1) {
-				list.add(i, tc);
-				incNextTestCaseNum();
-				setChanged();
-				notifyObservers(this);
-				return true;
+		if (list.size() == 0) {
+			list.add(tc);
+			incNextTestCaseNum();
+			setChanged();
+			notifyObservers(this);
+			return true;
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				int compare = tc.compareTo((TestCase) list.get(i));
+				if (compare == 0)
+					return false;
+				if (compare == -1) {
+					list.add(i, tc);
+					incNextTestCaseNum();
+					setChanged();
+					notifyObservers(this);
+					return true;
+				}
 			}
 		}
 		return false;

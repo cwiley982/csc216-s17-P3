@@ -35,6 +35,7 @@ public class LinkedList implements List, Serializable {
 		}
 		if (front == null) {
 			front = new Node(obj, null);
+			size++;
 			return true;
 		} else {
 			Node current = front;
@@ -42,6 +43,7 @@ public class LinkedList implements List, Serializable {
 				current = current.next;
 			}
 			current.next = new Node(obj, null);
+			size++;
 			return true;
 		}
 	}
