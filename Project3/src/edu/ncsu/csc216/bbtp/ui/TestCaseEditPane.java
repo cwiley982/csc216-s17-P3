@@ -371,22 +371,15 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return true if all fields are not empty
 	 */
 	boolean fieldsNotEmpty() {
-		if (testCaseID.getText().equals("")) {
-			return false;
-		} else if (testCaseDescription.getText().equals("")) {
+		if (testCaseDescription.getText().equals("")) {
 			return false;
 		} else if (tcTestingType.getSelectedIndex() == -1) {
 			return false;
 		} else if (expectedResults.getText().equals("")) {
 			return false;
+		} else if (testCreationDate.getValue() == null) {
+			return false;
 		}
-		// else if (actualResults.getText().equals("")) {
-		// return false;
-		// } else if (testCreationDate.getValue() == null) {
-		// return false;
-		// } else if (testLastTestedDate.getValue() == null) {
-		// return false;
-		// }
 		return true;
 	}
 
@@ -401,10 +394,12 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		testCaseDescription.setText(tcd.getDescription());
 		tcTestingType.setSelectedIndex(testingTypes.indexOf(tcd.getTestingType().getTestingTypeID()));
 		testCreationDate.setValue(tcd.getCreationDateTime());
-		testLastTestedDate.setValue(tcd.getLastTestedDateTime());
 		tested.setSelected(tcd.tested());
+		if (tcd.tested()) {
+			testLastTestedDate.setValue(tcd.getLastTestedDateTime());
+			actualResults.setText(tcd.getActualResults());
+		}
 		expectedResults.setText(tcd.getExpectedResults());
-		actualResults.setText(tcd.getActualResults());
 		pass.setSelected(tcd.pass());
 	}
 
@@ -444,10 +439,12 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 				tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
 			}
 			expectedResults.setText(data.getExpectedResults());
-			actualResults.setText(data.getActualResults());
 			testCaseDescription.setText(data.getDescription());
 			testCreationDate.setValue(data.getCreationDateTime());
-			testLastTestedDate.setValue(data.getLastTestedDateTime());
+			if (data.tested()) {
+				testLastTestedDate.setValue(data.getLastTestedDateTime());
+				actualResults.setText(data.getActualResults());
+			}
 			tested.setSelected(data.tested());
 			pass.setEnabled(data.pass());
 		}
@@ -456,12 +453,14 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 			testCaseID.setEditable(true);
 			tcTestingType.setEnabled(true);
 			expectedResults.setEditable(true);
-			actualResults.setEditable(true);
 			testCaseDescription.setEditable(true);
 			testCreationDate.setEnabled(true);
-			testLastTestedDate.setEnabled(true);
+			// if (data.tested()) {
+				testLastTestedDate.setEnabled(true);
+				actualResults.setEditable(true);
+				pass.setEnabled(true);
+			// }
 			tested.setEnabled(true);
-			pass.setEnabled(true);
 		}
 	}
 

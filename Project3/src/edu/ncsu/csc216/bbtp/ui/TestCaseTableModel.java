@@ -95,9 +95,6 @@ public class TestCaseTableModel extends AbstractTableModel implements Serializab
 	 *            column to consider
 	 */
 	public void setValueAt(Object obj, int row, int col) {
-		if (obj == null) {
-			throw new IllegalArgumentException();
-		}
 		if (row < 0 || row >= data.length || col < 0 || col > colNames.length) {
 			throw new IndexOutOfBoundsException();
 		}
