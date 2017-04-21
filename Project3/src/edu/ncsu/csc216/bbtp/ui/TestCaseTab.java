@@ -1,15 +1,24 @@
 package edu.ncsu.csc216.bbtp.ui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 import edu.ncsu.csc216.bbtp.model.TestCase;
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
+import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
 /**
  * Represents the tab containing the list of Test Case for a given TestCaseList

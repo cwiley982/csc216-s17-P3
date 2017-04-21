@@ -340,6 +340,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	void disableAdd() {
 		add = false;
 		clearFields();
+		data = null;
+		fillFields();
 	}
 
 	/**
@@ -363,6 +365,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	void disableEdit() {
 		edit = false;
 		clearFields();
+		data = null;
+		fillFields();
 	}
 
 	/**
@@ -435,9 +439,11 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 			pass.setEnabled(false);
 		} else {
 			testCaseID.setText(data.getTestCaseID());
+			tcTestingType.removeAllItems();
 			for (int i = 0; i < testingTypes.size(); i++) {
 				tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
 			}
+			tcTestingType.setSelectedItem(data.getTestingType());
 			expectedResults.setText(data.getExpectedResults());
 			testCaseDescription.setText(data.getDescription());
 			testCreationDate.setValue(data.getCreationDateTime());
@@ -450,7 +456,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		}
 
 		if (isAddMode() || isEditMode()) {
-			testCaseID.setEditable(true);
 			tcTestingType.setEnabled(true);
 			expectedResults.setEditable(true);
 			testCaseDescription.setEditable(true);
