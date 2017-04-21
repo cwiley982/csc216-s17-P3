@@ -61,20 +61,22 @@ public class LinkedList implements List, Serializable {
 		}
 		if (index == 0) { // adding to front
 			front = new Node(obj, front);
+			size++;
 		} else if (index == size) { // adding to back
 			Node current = front;
 			for (int i = 0; i < size() - 1; i++) {
 				current = current.next;
 			}
 			current.next = new Node(obj, null);
+			size++;
 		} else { // adding to middle
 			Node current = front;
 			for (int i = 0; i < index - 1; i++) {
 				current = current.next;
 			}
 			current.next = new Node(obj, current.next);
+			size++;
 		}
-		size++;
 	}
 
 	@Override
