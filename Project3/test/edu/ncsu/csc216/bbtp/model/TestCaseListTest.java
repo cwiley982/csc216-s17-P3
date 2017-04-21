@@ -93,8 +93,6 @@ public class TestCaseListTest {
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
-		// TestCase tc = new TestCase("New List-TC1", "desc", tt, created,
-		// "exp", false, lastTested, "act", false);
 		assertEquals("ID-TC1", tcl.getTestCaseAt(0).getTestCaseID());
 	}
 
@@ -104,6 +102,15 @@ public class TestCaseListTest {
 	@Test
 	public void testIsEmpty() {
 		assertTrue(tcl.isEmpty());
+	}
+
+	@Test
+	public void testIndexOf() {
+		TestingType tt = new TestingType("id", "type1", "desc");
+		Date created = new Date(20170420);
+		Date lastTested = new Date(20170420);
+		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
+		assertEquals(0, tcl.indexOf("ID-TC1"));
 	}
 
 	/**
