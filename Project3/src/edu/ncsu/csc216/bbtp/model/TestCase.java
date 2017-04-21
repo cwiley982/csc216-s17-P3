@@ -170,7 +170,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 */
 	public void setLastTestedDateTime(Date lastTestedDateTime) {
 		if (lastTestedDateTime == null)
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 		this.lastTestedDateTime = lastTestedDateTime;
 		setChanged();
 		notifyObservers(this);
