@@ -54,9 +54,9 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 		} catch (IllegalArgumentException e) {
 			return false;
 		}
-		tt.addObserver(this);
-		incNextTestingTypeNum();
 		if (list.add(tt)) {
+			tt.addObserver(this);
+			incNextTestingTypeNum();
 			setChanged();
 			notifyObservers(this);
 			return true;
@@ -136,6 +136,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public TestingType removeTestingTypeAt(int idx) {
 		TestingType tc = (TestingType) list.remove(idx);
+		tc.deleteObserver(this);
 		setChanged();
 		notifyObservers(this);
 		return tc;
@@ -150,7 +151,10 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *         found)
 	 */
 	public boolean removeTestingType(String id) {
-		if (indexOf(id) != -1 && list.remove(indexOf(id)) != null) {
+		int index = indexOf(id);
+		if (index != -1) {
+			TestingType tt = (TestingType) list.remove(indexOf(id));
+			tt.deleteObserver(this);
 			setChanged();
 			notifyObservers(this);
 			return true;
@@ -214,6 +218,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 		// notifyObservers(obj);
 
 		if (list.contains(observable)) {
+			setChanged();
 			notifyObservers(obj);
 		}
 	}

@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -58,6 +59,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	public TestCaseEditPane(TestingTypeList ttl) {
 		super();
 		testingTypes = ttl;
+		ttl.addObserver(this);
 		init();
 	}
 
@@ -413,8 +415,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the event listener
 	 */
 	void addFieldListener(EventListener el) {
-		// not really sure about this
-		// also needs to select a creation date
+		((JFormattedTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
+				.addDocumentListener((DocumentListener) el);
 		expectedResults.getDocument().addDocumentListener((DocumentListener) el);
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()

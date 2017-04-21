@@ -51,6 +51,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 		testingTypes = new TestingTypeList();
 		testingTypes.addObserver(this);
 		changed = false;
+		notifyObservers(this);
 	}
 
 	/**
@@ -70,6 +71,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public void setChanged(boolean tf) {
 		this.changed = tf;
+		notifyObservers(this);
 	}
 
 	/**
@@ -91,6 +93,8 @@ public class BBTP extends Observable implements Serializable, Observer {
 		if (filename == null || filename.isEmpty())
 			throw new IllegalArgumentException();
 		this.filename = filename;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -154,22 +158,26 @@ public class BBTP extends Observable implements Serializable, Observer {
 			}
 			TestCaseList added = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
 			added.addObserver(this);
-			notifyObservers(added);
+			// notifyObservers(added);
 			temp[testCases.length] = added;
 			int l = testCases.length;
 			testCases = temp;
 			incNextTestCaseListNum();
 			numLists++;
+			setChanged();
+			notifyObservers(this);
 			return l;
 		} else {
 			for (int i = 0; i < testCases.length; i++) {
 				if (testCases[i] == null) {
 					TestCaseList added = new TestCaseList("New List", ("TCL" + getNextTestCaseListNum()));
 					added.addObserver(this);
-					notifyObservers(added);
+					// notifyObservers(added);
 					testCases[i] = added;
 					incNextTestCaseListNum();
 					numLists++;
+					setChanged();
+					notifyObservers(this);
 					return i;
 				}
 			}
@@ -196,6 +204,8 @@ public class BBTP extends Observable implements Serializable, Observer {
 			testCases[numLists - 1] = null;
 		}
 		numLists--;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	/**
@@ -298,6 +308,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public void update(Observable o, Object arg) {
 		setChanged(true);
+		setChanged();
 		notifyObservers(arg);
 		// if (o instanceof TestCaseList) {
 		// // do something
