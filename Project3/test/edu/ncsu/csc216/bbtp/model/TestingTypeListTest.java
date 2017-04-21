@@ -91,6 +91,9 @@ public class TestingTypeListTest {
 		assertFalse(ttl.removeTestingType("TT0"));
 	}
 
+	/**
+	 * Tests getting 2D array
+	 */
 	@Test
 	public void testGet2DArray() {
 		ttl.addTestingType("name", "desc");

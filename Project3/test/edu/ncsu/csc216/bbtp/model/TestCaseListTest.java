@@ -80,7 +80,7 @@ public class TestCaseListTest {
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		assertTrue(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
-		assertTrue(tcl.addTestCase("desc2", tt, (new Date(20170421)), "exp", false, lastTested, "act", false));
+		assertTrue(tcl.addTestCase("desc2", tt, new Date(20170421), "exp", false, lastTested, "act", false));
 	}
 
 	/**
