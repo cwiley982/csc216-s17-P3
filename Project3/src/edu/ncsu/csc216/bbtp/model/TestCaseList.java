@@ -266,6 +266,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 *            the objects to be notified of the change
 	 */
 	public void update(Observable o, Object obj) {
+		// both parameters are test cases I think
 		if (list.contains(o)) {
 			// update list
 			setChanged();
