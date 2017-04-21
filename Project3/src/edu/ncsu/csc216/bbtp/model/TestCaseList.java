@@ -266,7 +266,5 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			setChanged();
 			notifyObservers(obj);
 		}
-		setChanged();
-		notifyObservers(this);
 	}
 }
