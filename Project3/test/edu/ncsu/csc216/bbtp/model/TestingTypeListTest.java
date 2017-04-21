@@ -32,11 +32,11 @@ public class TestingTypeListTest {
 	public void testAddTestingType() {
 		assertFalse(ttl.addTestingType("", "desc"));
 		assertFalse(ttl.addTestingType(null, "desc"));
-		
+
 		assertTrue(ttl.addTestingType("name", "desc"));
 		assertEquals(1, ttl.size());
 	}
-	
+
 	/**
 	 * Tests getting the testing type at a certain index
 	 */
@@ -46,7 +46,7 @@ public class TestingTypeListTest {
 		assertEquals(1, ttl.size());
 		assertEquals("TT1", ttl.getTestingTypeAt(0).getTestingTypeID());
 	}
-	
+
 	/**
 	 * Tests getting the index of a testing type by its name and its id
 	 */
@@ -98,20 +98,18 @@ public class TestingTypeListTest {
 		assertEquals("name2", ttl.get2DArray()[1][1]);
 	}
 
-	@Test
-	public void testUpdate() {
-		ttl.addTestingType("name", "desc");
-		ttl.addTestingType("name2", "desc");
-		TestingType tt = new TestingType("id3", "name3", "desc3");
-
-		// TODO figure out what's what so I can test correctly
-
-		ttl.update(tt, tt);
-		// assertEquals(3, ttl.get2DArray().length);
-		//
-		// tt.setName("new name");
-		// ttl.update(tt, tt);
-		// assertEquals("new name", ttl.get2DArray()[2][1]);
-	}
+	// I commented this out because it was causing a PMD error that stopped TS
+	// cases from running
+	/*
+	 * @Test public void testUpdate() { ttl.addTestingType("name", "desc");
+	 * ttl.addTestingType("name2", "desc"); TestingType tt = new
+	 * TestingType("id3", "name3", "desc3");
+	 * 
+	 * // TODO figure out what's what so I can test correctly
+	 * 
+	 * ttl.update(tt, tt); // assertEquals(3, ttl.get2DArray().length); // //
+	 * tt.setName("new name"); // ttl.update(tt, tt); //
+	 * assertEquals("new name", ttl.get2DArray()[2][1]); }
+	 */
 
 }
