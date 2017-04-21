@@ -205,10 +205,20 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 * @return true if there exists a test case with that id and it was removed
 	 */
 	public boolean removeTestCase(String testCaseID) {
-		TestCase tc = (TestCase) list.remove(indexOf(testCaseID));
-		setChanged();
-		notifyObservers(this);
-		return tc != null;
+		TestCase tc = null;
+		for (int i = 0; i < nextTestCaseNum; i++) {
+			if (get2DArray()[i][0].equals(testCaseID)) {
+				tc = (TestCase) list.remove(i);
+				break;
+			}
+		}
+		if (tc != null) {
+			setChanged();
+			notifyObservers(this);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

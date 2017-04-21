@@ -47,6 +47,9 @@ public class ArrayList implements List, Serializable {
 	public boolean add(Object obj) {
 		if (obj == null)
 			throw new NullPointerException();
+		if (contains(obj)) {
+			throw new IllegalArgumentException();
+		}
 		if (list[list.length - 1] != null) {
 			growArray();
 		}

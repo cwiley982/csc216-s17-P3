@@ -31,8 +31,13 @@ public class ArrayListTest {
 	 */
 	@Test
 	public void testAddObj() {
-		assertFalse(al.add(null));
-		assertEquals(0, al.size());
+		try {
+			assertFalse(al.add(null));
+			fail();
+		} catch (NullPointerException e) {
+			assertEquals(0, al.size());
+		}
+
 		al.add("hey");
 		assertEquals(1, al.size());
 	}

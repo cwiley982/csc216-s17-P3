@@ -31,7 +31,7 @@ public class LinkedList implements List, Serializable {
 	 */
 	public boolean add(Object obj) {
 		if (obj == null) {
-			return false;
+			throw new NullPointerException();
 		}
 		if (contains(obj)) {
 			return false;

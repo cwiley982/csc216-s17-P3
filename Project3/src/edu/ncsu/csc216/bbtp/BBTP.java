@@ -126,7 +126,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * @return the testCaseList at the given index
 	 */
 	public TestCaseList getTestCaseList(int idx) {
-		if (idx < 0 || idx >= testCases.length)
+		if (idx < 0 || idx >= getNumTestCaseLists())
 			throw new IndexOutOfBoundsException();
 		return testCases[idx];
 	}
@@ -297,7 +297,13 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            changed object
 	 */
 	public void update(Observable o, Object arg) {
-		setChanged(true);
-		notifyObservers(arg);
+		if (o instanceof TestCaseList) {
+			// do something
+			notifyObservers(this);
+		} else if (o instanceof TestingTypeList) {
+			// do something
+			notifyObservers(this);
+		}
+		// TODO
 	}
 }

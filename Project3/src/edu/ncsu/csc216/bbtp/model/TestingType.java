@@ -104,13 +104,18 @@ public class TestingType extends Observable implements Serializable, Comparable<
 
 	@Override
 	public boolean equals(Object obj) {
-		TestingType other = (TestingType) obj;
-		if (testingTypeID == null) {
-			if (other.testingTypeID != null)
+		if (obj instanceof TestingType) {
+			TestingType other = (TestingType) obj;
+			if (testingTypeID == null) {
+				if (other.testingTypeID != null) {
+					return false;
+				}
+			} else if (!testingTypeID.equals(other.testingTypeID)) {
 				return false;
-		} else if (!testingTypeID.equals(other.testingTypeID))
-			return false;
-		return true;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
