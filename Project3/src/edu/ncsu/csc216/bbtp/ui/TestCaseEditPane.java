@@ -437,7 +437,6 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
-		// tested.addActionListener((DocumentListener) el);
 	}
 
 	/**
