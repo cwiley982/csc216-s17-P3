@@ -384,7 +384,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 				return false;
 			} else if (testCreationDate.getValue() == null) {
 				return false;
-			} else if (actualResults.getText().equals("") || actualResults.getText() == null) {
+			} else if (actualResults.getText().equals("")) {
 				return false;
 			} else if (testLastTestedDate.getValue() == null) {
 				return false;
@@ -433,6 +433,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
 		expectedResults.getDocument().addDocumentListener((DocumentListener) el);
+		actualResults.getDocument().addDocumentListener((DocumentListener) el);
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
