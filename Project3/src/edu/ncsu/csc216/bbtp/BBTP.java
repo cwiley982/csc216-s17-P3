@@ -297,13 +297,15 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 *            changed object
 	 */
 	public void update(Observable o, Object arg) {
-		if (o instanceof TestCaseList) {
-			// do something
-			notifyObservers(this);
-		} else if (o instanceof TestingTypeList) {
-			// do something
-			notifyObservers(this);
-		}
+		setChanged(true);
+		notifyObservers(arg);
+		// if (o instanceof TestCaseList) {
+		// // do something
+		// notifyObservers(this);
+		// } else if (o instanceof TestingTypeList) {
+		// // do something
+		// notifyObservers(this);
+		// }
 		// TODO
 	}
 }

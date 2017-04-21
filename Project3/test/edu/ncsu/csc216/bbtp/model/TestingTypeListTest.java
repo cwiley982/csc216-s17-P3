@@ -18,7 +18,7 @@ public class TestingTypeListTest {
 	TestingTypeList ttl;
 
 	/**
-	 * Sets up a testing typw list to be used in testing
+	 * Sets up a testing type list to be used in testing
 	 */
 	@Before
 	public void setUp() {
@@ -89,6 +89,29 @@ public class TestingTypeListTest {
 		ttl.addTestingType("name", "desc");
 		assertTrue(ttl.removeTestingType("TT1"));
 		assertFalse(ttl.removeTestingType("TT0"));
+	}
+
+	@Test
+	public void testGet2DArray() {
+		ttl.addTestingType("name", "desc");
+		ttl.addTestingType("name2", "desc");
+		assertEquals("name2", ttl.get2DArray()[1][1]);
+	}
+
+	@Test
+	public void testUpdate() {
+		ttl.addTestingType("name", "desc");
+		ttl.addTestingType("name2", "desc");
+		TestingType tt = new TestingType("id3", "name3", "desc3");
+
+		// TODO figure out what's what so I can test correctly
+
+		ttl.update(tt, tt);
+		// assertEquals(3, ttl.get2DArray().length);
+		//
+		// tt.setName("new name");
+		// ttl.update(tt, tt);
+		// assertEquals("new name", ttl.get2DArray()[2][1]);
 	}
 
 }
