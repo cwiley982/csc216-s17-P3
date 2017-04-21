@@ -168,8 +168,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 		Object[][] obj = new Object[list.size()][3];
 		for (int i = 0; i < list.size(); i++) {
 			obj[i][0] = ((TestingType) list.get(i)).getTestingTypeID();
-			obj[i][0] = ((TestingType) list.get(i)).getName();
-			obj[i][0] = ((TestingType) list.get(i)).getDescription();
+			obj[i][1] = ((TestingType) list.get(i)).getName();
+			obj[i][2] = ((TestingType) list.get(i)).getDescription();
 		}
 		return obj;
 	}

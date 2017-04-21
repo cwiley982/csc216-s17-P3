@@ -84,6 +84,9 @@ public class TestCaseListTest {
 		assertFalse(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
 	}
 
+	/**
+	 * Tests getting a test case at an index
+	 */
 	@Test
 	public void testGetTestCaseAt() {
 		TestingType tt = new TestingType("id", "type1", "desc");
@@ -92,40 +95,52 @@ public class TestCaseListTest {
 		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
 		// TestCase tc = new TestCase("New List-TC1", "desc", tt, created,
 		// "exp", false, lastTested, "act", false);
-		assertEquals("New List-TC1", tcl.getTestCaseAt(0).getTestCaseID());
+		assertEquals("ID-TC1", tcl.getTestCaseAt(0).getTestCaseID());
 	}
 
+	/**
+	 * Tests isEmpty() method
+	 */
 	@Test
 	public void testIsEmpty() {
 		assertTrue(tcl.isEmpty());
 	}
 
+	/**
+	 * Tests removing at an index
+	 */
 	@Test
 	public void testRemoveInt() {
 		TestingType tt = new TestingType("id", "type1", "desc");
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
-		assertEquals("New List-TC1", tcl.removeTestCaseAt(0));
+		assertEquals("ID-TC1", tcl.removeTestCaseAt(0).getTestCaseID());
 	}
 
+	/**
+	 * Tests removing a test case by its id
+	 */
 	@Test
 	public void testRemoveByID() {
 		TestingType tt = new TestingType("id", "type1", "desc");
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
-		tcl.removeTestCase("New List-TC1");
+		tcl.removeTestCase("ID-TC1");
 		assertTrue(tcl.isEmpty());
 	}
 
+	/**
+	 * Tests getting the 2D array
+	 */
 	@Test
 	public void testGet2DArray() {
 		TestingType tt = new TestingType("id", "type1", "desc");
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false);
-		assertEquals("desc", tcl.get2DArray()[0][2]);
+		assertEquals("desc", tcl.get2DArray()[0][1]);
 	}
 
 }

@@ -6,7 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
@@ -18,7 +18,7 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  * @author Caitlyn
  *
  */
-public class TestCaseListPane extends JPanel implements Serializable, Observer {
+public class TestCaseListPane extends JScrollPane implements Serializable, Observer {
 
 	private static final long serialVersionUID = -2210716111020406799L;
 	private TestCaseList testCases;
@@ -68,12 +68,12 @@ public class TestCaseListPane extends JPanel implements Serializable, Observer {
 	 */
 	private void initView() {
 		table = new JTable(tctm);
-		table.setVisible(true);
 		for (int i = 0; i < colWidths.length; i++) {
 			table.getColumnModel().getColumn(i).setPreferredWidth(colWidths[i]);
 		}
 		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		table.setFillsViewportHeight(false);
+		setViewportView(table);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 

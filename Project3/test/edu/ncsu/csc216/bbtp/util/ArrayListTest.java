@@ -8,8 +8,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.bbtp.util.ArrayList;
-
 /**
  * Tests the functionality of ArrayList
  * 
@@ -28,6 +26,9 @@ public class ArrayListTest {
 		al = new ArrayList(3);
 	}
 
+	/**
+	 * Tests adding to the array list without a specified index
+	 */
 	@Test
 	public void testAddObj() {
 		assertFalse(al.add(null));
@@ -36,6 +37,9 @@ public class ArrayListTest {
 		assertEquals(1, al.size());
 	}
 
+	/**
+	 * Tests adding to the array list at a specified index
+	 */
 	@Test
 	public void testAddIntObj() {
 		try {
@@ -68,6 +72,9 @@ public class ArrayListTest {
 		assertEquals(4, al.size());
 	}
 
+	/**
+	 * Tests contains() method
+	 */
 	@Test
 	public void testContains() {
 		al.add("hi");
@@ -75,14 +82,19 @@ public class ArrayListTest {
 		assertFalse(al.contains("hey"));
 	}
 
+	/**
+	 * Tests getting the index of an object
+	 */
 	@Test
 	public void testIndexOf() {
 		al.add(0, "hey");
 		assertEquals(0, al.indexOf("hey"));
-		al.add("hi");
 		assertEquals(-1, al.indexOf("hi"));
 	}
 
+	/**
+	 * Tests getting an object at an index
+	 */
 	@Test
 	public void testGet() {
 		try {
@@ -103,6 +115,9 @@ public class ArrayListTest {
 		assertEquals(0, al.indexOf("hi"));
 	}
 
+	/**
+	 * Tests isEmpty() method
+	 */
 	@Test
 	public void testIsEmpty() {
 		assertTrue(al.isEmpty());
@@ -110,6 +125,9 @@ public class ArrayListTest {
 		assertFalse(al.isEmpty());
 	}
 
+	/**
+	 * Tests remove method
+	 */
 	@Test
 	public void testRemove() {
 		try {

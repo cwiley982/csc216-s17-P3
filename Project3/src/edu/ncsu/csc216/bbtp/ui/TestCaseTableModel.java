@@ -18,7 +18,7 @@ public class TestCaseTableModel extends AbstractTableModel implements Serializab
 	private static final long serialVersionUID = 5954551753060998701L;
 	/** Array of the names of each column in the table */
 	private String[] colNames = { "ID", "Description", "Test Type", "Creation Date", "Last Tested Date", "Tested?",
-			"Expected Results", "Actual Results", "Pass" };
+			"Expected Results", "Actual Results", "Pass?" };
 	/** 2D array containing all the data in the table */
 	private Object[][] data;
 

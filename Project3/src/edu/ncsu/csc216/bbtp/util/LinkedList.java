@@ -102,7 +102,8 @@ public class LinkedList implements List, Serializable {
 	}
 
 	@Override
-	public int indexOf(Object obj) {
+	public int indexOf(Object obj) { // testing cases won't be equal to an ID
+										// passed in, need to fix
 		Node current = front;
 		for (int i = 0; i < size; i++) {
 			if (current.value == obj) {
@@ -153,7 +154,7 @@ public class LinkedList implements List, Serializable {
 	public class Node implements Serializable {
 		private static final long serialVersionUID = 484909840L;
 		/** Value of the node */
-		protected Object value;
+		Object value;
 		private Node next;
 
 		/**
