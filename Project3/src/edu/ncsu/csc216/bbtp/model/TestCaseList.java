@@ -222,7 +222,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public boolean removeTestCase(String testCaseID) {
 		TestCase tc = null;
-		for (int i = 0; i < nextTestCaseNum; i++) {
+		for (int i = 0; i < nextTestCaseNum - 1; i++) {
 			if (get2DArray()[i][0].equals(testCaseID)) {
 				tc = (TestCase) list.remove(i);
 				break;
