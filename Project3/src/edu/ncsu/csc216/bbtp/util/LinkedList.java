@@ -34,7 +34,7 @@ public class LinkedList implements List, Serializable {
 			throw new NullPointerException();
 		}
 		if (contains(obj)) {
-			return false;
+			throw new IllegalArgumentException();
 		}
 		if (front == null) {
 			front = new Node(obj, null);
