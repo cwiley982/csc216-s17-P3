@@ -167,6 +167,9 @@ public class LinkedList implements List, Serializable {
 		 *            the next node after the one being created
 		 */
 		public Node(Object obj, Node node) {
+			if (obj == null) {
+				throw new NullPointerException();
+			}
 			value = obj;
 			next = node;
 		}
