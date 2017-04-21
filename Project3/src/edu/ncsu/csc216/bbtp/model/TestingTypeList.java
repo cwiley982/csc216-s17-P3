@@ -48,7 +48,12 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 * @return true if the TestingType is added to the list and false otherwise
 	 */
 	public boolean addTestingType(String name, String desc) {
-		TestingType tt = new TestingType(("TT" + getNextTestingTypeNum()), name, desc);
+		TestingType tt;
+		try {
+			tt = new TestingType(("TT" + getNextTestingTypeNum()), name, desc);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 		tt.addObserver(this);
 		incNextTestingTypeNum();
 		if (list.add(tt)) {
@@ -145,7 +150,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 *         found)
 	 */
 	public boolean removeTestingType(String id) {
-		if (list.remove(indexOf(id)) != null) {
+		if (indexOf(id) != -1 && list.remove(indexOf(id)) != null) {
 			setChanged();
 			notifyObservers(this);
 			return true;

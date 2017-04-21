@@ -2,7 +2,6 @@ package edu.ncsu.csc216.bbtp.ui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.EventListener;
@@ -415,13 +414,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 */
 	void addFieldListener(EventListener el) {
 		// not really sure about this
-
-		testCaseID.getDocument().addDocumentListener((DocumentListener) el);
+		// also needs to select a creation date
 		expectedResults.getDocument().addDocumentListener((DocumentListener) el);
-		actualResults.getDocument().addDocumentListener((DocumentListener) el);
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);
-		tested.addActionListener((ActionListener) el);
-		pass.addActionListener((ActionListener) el);
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
 	}

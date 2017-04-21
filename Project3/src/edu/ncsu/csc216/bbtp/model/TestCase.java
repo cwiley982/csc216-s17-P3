@@ -77,14 +77,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            the description to set
 	 */
 	public void setDescription(String description) {
-		if (description == null || description.isEmpty())
-			throw new IllegalArgumentException();
-		int count = 0;
-		for (int i = 0; i < description.length(); i++) {
-			if (Character.isWhitespace(description.charAt(i)))
-				count++;
-		}
-		if (count == description.length())
+		if (description == null || description.trim().isEmpty())
 			throw new IllegalArgumentException();
 		this.description = description;
 		setChanged();
@@ -107,14 +100,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            expected results to set
 	 */
 	public void setExpectedResults(String expectedResults) {
-		if (expectedResults == null || expectedResults.isEmpty())
-			throw new IllegalArgumentException();
-		int count = 0;
-		for (int i = 0; i < expectedResults.length(); i++) {
-			if (Character.isWhitespace(expectedResults.charAt(i)))
-				count++;
-		}
-		if (count == expectedResults.length())
+		if (expectedResults == null || expectedResults.trim().isEmpty())
 			throw new IllegalArgumentException();
 		this.expectedResults = expectedResults;
 		setChanged();
@@ -137,14 +123,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            actual results to set
 	 */
 	public void setActualResults(String actualResults) {
-		if (actualResults == null || actualResults.isEmpty())
-			throw new IllegalArgumentException();
-		int count = 0;
-		for (int i = 0; i < actualResults.length(); i++) {
-			if (Character.isWhitespace(actualResults.charAt(i)))
-				count++;
-		}
-		if (count == actualResults.length())
+		if (actualResults == null || actualResults.trim().isEmpty())
 			throw new IllegalArgumentException();
 		this.actualResults = actualResults;
 		setChanged();
