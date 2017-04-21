@@ -123,8 +123,11 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            actual results to set
 	 */
 	public void setActualResults(String actualResults) {
-		if (testedStatus && (actualResults == null || actualResults.trim().isEmpty()))
-			throw new IllegalArgumentException();
+		if (testedStatus) {
+			if (actualResults == null || actualResults.trim().isEmpty()) {
+				throw new IllegalArgumentException();
+			}
+		}
 		this.actualResults = actualResults;
 		setChanged();
 		notifyObservers(this);
@@ -331,7 +334,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 		try {
 			return tc.getLastTestedDateTime().compareTo(this.getLastTestedDateTime());
 		} catch (NullPointerException e) {
-			return -1;
+			return 1;
 		}
 	}
 

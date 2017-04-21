@@ -375,14 +375,30 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 * @return true if all fields are not empty
 	 */
 	boolean fieldsNotEmpty() {
-		if (testCaseDescription.getText().equals("")) {
-			return false;
-		} else if (tcTestingType.getSelectedIndex() == -1) {
-			return false;
-		} else if (expectedResults.getText().equals("")) {
-			return false;
-		} else if (testCreationDate.getValue() == null) {
-			return false;
+		if (tested.isSelected()) {
+			if (testCaseDescription.getText().equals("")) {
+				return false;
+			} else if (tcTestingType.getSelectedIndex() == -1) {
+				return false;
+			} else if (expectedResults.getText().equals("")) {
+				return false;
+			} else if (testCreationDate.getValue() == null) {
+				return false;
+			} else if (actualResults.getText().equals("") || actualResults.getText() == null) {
+				return false;
+			} else if (testLastTestedDate.getValue() == null) {
+				return false;
+			}
+		} else {
+			if (testCaseDescription.getText().equals("")) {
+				return false;
+			} else if (tcTestingType.getSelectedIndex() == -1) {
+				return false;
+			} else if (expectedResults.getText().equals("")) {
+				return false;
+			} else if (testCreationDate.getValue() == null) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -420,6 +436,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);
 		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
+		// tested.addActionListener((DocumentListener) el);
 	}
 
 	/**

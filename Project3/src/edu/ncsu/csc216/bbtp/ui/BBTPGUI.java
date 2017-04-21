@@ -1,8 +1,5 @@
 package edu.ncsu.csc216.bbtp.ui;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -12,7 +9,15 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 
-import edu.ncsu.csc216.bbtp.*;
+import javax.swing.BoxLayout;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import edu.ncsu.csc216.bbtp.BBTP;
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
 
 /**
