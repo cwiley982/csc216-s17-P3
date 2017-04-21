@@ -329,11 +329,7 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 
 	@Override
 	public int compareTo(TestCase tc) {
-		try {
-			return tc.getLastTestedDateTime().compareTo(this.getLastTestedDateTime());
-		} catch (NullPointerException e) {
-			return 1;
-		}
+		return tc.getLastTestedDateTime().compareTo(this.getLastTestedDateTime());
 	}
 
 }
