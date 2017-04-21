@@ -507,9 +507,10 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the object being changed
 	 */
 	public void update(Observable o, Object ol) {
-		if (ol instanceof TestingType) {
-
+		if (o instanceof TestingTypeList) {
+			testingTypes = (TestingTypeList) o;
 		}
+		// TODO
 		fillFields();
 	}
 }

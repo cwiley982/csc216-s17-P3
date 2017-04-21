@@ -162,7 +162,12 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 * @return the test case with matching id
 	 */
 	public int indexOf(String id) {
-		return list.indexOf(id);
+		for (int i = 0; i < list.size(); i++) {
+			if (((TestCase) list.get(i)).getTestCaseID().equals(id)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/**
@@ -248,7 +253,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public void update(Observable observable, Object obj) {
 		if (list.contains(observable)) {
-			notifyObservers(obj);
+			// update list
+			notifyObservers(this);
 		}
 	}
 }

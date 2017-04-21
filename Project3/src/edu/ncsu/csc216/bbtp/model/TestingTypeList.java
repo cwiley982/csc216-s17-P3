@@ -189,7 +189,27 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public void update(Observable observable, Object obj) {
 		if (list.contains(observable)) {
-			notifyObservers(obj);
+			if (obj instanceof TestingType) {
+				TestingType other = (TestingType) obj;
+				int index = list.indexOf(other.getTestingTypeID());
+				TestingType old = (TestingType) list.get(index);
+				if (old.equals(obj)) {
+					// no data changed, notified bc it's being removed
+					list.remove(index);
+				} else {
+					// if not equal, data was changed
+					old.setName(other.getName());
+					old.setDescription(other.getDescription());
+					// update data fields
+				}
+			}
+			setChanged();
+			notifyObservers(this);
+		} else {
+			// if not in list, method is called to add it to the list
+			list.add((TestingType) obj);
+			setChanged();
+			notifyObservers(this);
 		}
 	}
 }
