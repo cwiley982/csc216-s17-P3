@@ -260,20 +260,16 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	/**
 	 * Notifies the observers of a change to the list
 	 * 
-	 * @param observable
+	 * @param o
 	 *            the action being observed, triggers a notification
 	 * @param obj
 	 *            the objects to be notified of the change
 	 */
-	public void update(Observable observable, Object obj) {
-		if (list.contains(observable)) {
+	public void update(Observable o, Object obj) {
+		if (list.contains(o)) {
 			// update list
 			setChanged();
 			notifyObservers(obj);
-		} else {
-			setChanged();
-			notifyObservers(obj);
 		}
-
 	}
 }
