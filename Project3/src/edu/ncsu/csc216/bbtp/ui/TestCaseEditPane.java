@@ -12,7 +12,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -380,13 +379,14 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 			return false;
 		} else if (expectedResults.getText().equals("")) {
 			return false;
-		} else if (actualResults.getText().equals("")) {
-			return false;
-		} else if (testCreationDate.getValue() == null) {
-			return false;
-		} else if (testLastTestedDate.getValue() == null) {
-			return false;
 		}
+		// else if (actualResults.getText().equals("")) {
+		// return false;
+		// } else if (testCreationDate.getValue() == null) {
+		// return false;
+		// } else if (testLastTestedDate.getValue() == null) {
+		// return false;
+		// }
 		return true;
 	}
 
@@ -415,7 +415,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 	 *            the event listener
 	 */
 	void addFieldListener(EventListener el) {
-		((JFormattedTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
+		((JTextField) tcTestingType.getEditor().getEditorComponent()).getDocument()
 				.addDocumentListener((DocumentListener) el);
 		expectedResults.getDocument().addDocumentListener((DocumentListener) el);
 		testCaseDescription.getDocument().addDocumentListener((DocumentListener) el);

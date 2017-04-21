@@ -135,7 +135,7 @@ public class TestingType extends Observable implements Serializable, Comparable<
 
 	@Override
 	public String toString() {
-		return "TestingType [name=" + name + ", description=" + description + ", testingTypeID=" + testingTypeID + "]";
+		return getName();
 	}
 
 }

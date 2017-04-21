@@ -118,10 +118,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			Date lastTestDate, String act, boolean pass) {
 		TestCase tc = new TestCase((testCaseListID + "-TC" + getNextTestCaseNum()), desc, type, creation, exp, tested,
 				lastTestDate, act, pass);
-		tc.addObserver(this); // added this because it gave it as an example, i
-								// don't know what it means
+
 		if (list.size() == 0) {
 			list.add(tc);
+			tc.addObserver(this); // added this because it gave it as an
+									// example,
+									// i
+			// don't know what it means
 			incNextTestCaseNum();
 			setChanged();
 			notifyObservers(this);
@@ -129,10 +132,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		} else {
 			for (int i = 0; i < list.size(); i++) {
 				int compare = tc.compareTo((TestCase) list.get(i));
-				if (compare == 0)
+				if (compare == 0) {
+					// duplicate
 					return false;
+				}
 				if (compare == -1) {
 					list.add(i, tc);
+					tc.addObserver(this);
 					incNextTestCaseNum();
 					setChanged();
 					notifyObservers(this);
@@ -254,6 +260,9 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	public void update(Observable observable, Object obj) {
 		if (list.contains(observable)) {
 			// update list
+			setChanged();
+			notifyObservers(obj);
+		} else {
 			setChanged();
 			notifyObservers(obj);
 		}
