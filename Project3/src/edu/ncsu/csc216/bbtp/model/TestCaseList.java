@@ -136,7 +136,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 					// duplicate
 					return false;
 				}
-				if (compare == -1) {
+				// if the test case to add comes before the current one
+				if (compare == 1) {
 					list.add(i, tc);
 					tc.addObserver(this);
 					incNextTestCaseNum();
@@ -145,8 +146,15 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 					return true;
 				}
 			}
+			// if it gets through the entire list, new test case should be added
+			// to back
+			list.add(tc);
+			tc.addObserver(this);
+			incNextTestCaseNum();
+			setChanged();
+			notifyObservers(this);
+			return true;
 		}
-		return false;
 	}
 
 	/**
