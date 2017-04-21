@@ -76,7 +76,7 @@ public class LinkedListTest {
         try {
             ll.add(4, null);
             fail();
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
             assertEquals(13, ll.size());
         }
 
