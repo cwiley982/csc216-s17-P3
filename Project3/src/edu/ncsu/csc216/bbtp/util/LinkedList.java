@@ -20,6 +20,7 @@ public class LinkedList implements List, Serializable {
 	 */
 	public LinkedList() {
 		front = null;
+		size = 0;
 	}
 
 	/**
