@@ -131,10 +131,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			return true;
 		} else {
 			for (int i = 0; i < list.size(); i++) {
-				int compare = tc.compareTo((TestCase) list.get(i));
+
 				// if the test case to add comes before the current one
 				try {
+
+					// if the test case to add comes before the current one
 					if (((TestCase) list.get(i)).getLastTestedDateTime() != null) {
+						int compare = tc.compareTo((TestCase) list.get(i));
 						if (compare == 1) {
 							list.add(i, tc);
 							tc.addObserver(this);
