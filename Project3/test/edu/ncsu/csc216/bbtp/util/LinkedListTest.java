@@ -7,8 +7,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.bbtp.util.LinkedList;
-
 /**
  * Tests the functionality of the linked list class
  * 
@@ -42,7 +40,13 @@ public class LinkedListTest {
      */
     @Test
     public void testAdd() {
-		assertFalse(ll.add(null));
+		try {
+			ll.add(null);
+			fail();
+		} catch (NullPointerException e) {
+			assertEquals(10, ll.size());
+		}
+
 		// add to size
 		ll.add(10, "hi");
         assertEquals(11, ll.size());
