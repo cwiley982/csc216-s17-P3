@@ -145,6 +145,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 						}
 					}
 				} catch (NullPointerException e) {
+					// if last tested for new test is null
 					list.add(i, tc);
 					tc.addObserver(this);
 					incNextTestCaseNum();
