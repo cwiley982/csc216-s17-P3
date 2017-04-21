@@ -472,7 +472,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 		testCaseID.setText("");
 		testCaseDescription.setText("");
 		tcTestingType.setSelectedIndex(-1);
-		getTestCreationDateSpinner(); // don't know if this is right
+		getTestCreationDateSpinner();
 		getTestLastTestedDateSpinner();
 		tested.setSelected(false);
 		expectedResults.setText("");

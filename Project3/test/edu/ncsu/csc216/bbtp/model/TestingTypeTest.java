@@ -73,7 +73,7 @@ public class TestingTypeTest {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("TestingType [name=name, description=desc, testingTypeID=id]", tt.toString());
+		assertEquals("name", tt.toString());
 	}
 
 }

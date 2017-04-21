@@ -78,6 +78,7 @@ public class TestCaseTest {
 	@Test
 	public void testSetActualResults() {
 		try {
+			tc.setTestedStatus(true);
 			tc.setActualResults(null);
 			fail();
 		} catch (IllegalArgumentException e) {
@@ -111,6 +112,7 @@ public class TestCaseTest {
 	@Test
 	public void testSetLastTestedDateTime() {
 		try {
+			tc.setTestedStatus(true);
 			tc.setLastTestedDateTime(null);
 			fail();
 		} catch (IllegalArgumentException e) {
