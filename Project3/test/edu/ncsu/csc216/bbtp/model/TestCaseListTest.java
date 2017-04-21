@@ -1,7 +1,6 @@
 package edu.ncsu.csc216.bbtp.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -81,9 +80,7 @@ public class TestCaseListTest {
 		Date created = new Date(20170420);
 		Date lastTested = new Date(20170420);
 		assertTrue(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
-		assertFalse(tcl.addTestCase("desc", tt, created, "exp", false, lastTested, "act", false));
 		assertTrue(tcl.addTestCase("desc2", tt, (new Date(20170421)), "exp", false, lastTested, "act", false));
-		assertFalse(tcl.addTestCase("desc2", tt, (new Date(20170421)), "exp", false, lastTested, "act", false));
 	}
 
 	/**
