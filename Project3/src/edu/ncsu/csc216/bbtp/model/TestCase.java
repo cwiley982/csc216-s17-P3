@@ -123,10 +123,8 @@ public class TestCase extends Observable implements Comparable<TestCase>, Serial
 	 *            actual results to set
 	 */
 	public void setActualResults(String actualResults) {
-		if (testedStatus) {
-			if (actualResults == null || actualResults.trim().isEmpty()) {
+		if (testedStatus && (actualResults == null || actualResults.trim().isEmpty())) {
 				throw new IllegalArgumentException();
-			}
 		}
 		this.actualResults = actualResults;
 		setChanged();
