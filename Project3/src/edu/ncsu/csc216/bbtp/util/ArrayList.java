@@ -30,6 +30,9 @@ public class ArrayList implements List, Serializable {
 	 *            size of array list
 	 */
 	public ArrayList(int num) {
+		if (num <= 0) {
+			throw new IllegalArgumentException();
+		}
 		list = new Object[num];
 		size = 0;
 	}
@@ -43,9 +46,10 @@ public class ArrayList implements List, Serializable {
 	 */
 	public boolean add(Object obj) {
 		if (obj == null)
-			return false;
-		if (list[list.length - 1] != null)
+			throw new NullPointerException();
+		if (list[list.length - 1] != null) {
 			growArray();
+		}
 		list[size] = obj;
 		size++;
 		return true;
@@ -93,8 +97,9 @@ public class ArrayList implements List, Serializable {
 	@Override
 	public boolean contains(Object obj) {
 		for (int i = 0; i < size; i++) {
-			if (list[i].equals(obj))
+			if (list[i].equals(obj)) {
 				return true;
+			}
 		}
 		return false;
 	}

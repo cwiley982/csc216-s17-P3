@@ -158,6 +158,9 @@ public class TestCaseTest {
 		}
 	}
 
+	/**
+	 * Tests the equals method
+	 */
 	@Test
 	public void testEquals() {
 		TestingType tt = new TestingType("id", "type1", "desc");
@@ -185,6 +188,9 @@ public class TestCaseTest {
 		assertFalse(tc.equals(tc10));
 	}
 
+	/**
+	 * Tests that the hashcode of two identical test cases is the same
+	 */
 	@Test
 	public void testHashCode() {
 		TestingType tt = new TestingType("id", "type1", "desc");
