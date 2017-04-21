@@ -101,7 +101,7 @@ public class TestCaseTest {
 			tc.setCreationDateTime(null);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals((new Date(20170420)), tc.getCreationDateTime());
+			assertEquals(new Date(20170420), tc.getCreationDateTime());
 		}
 	}
 
@@ -114,7 +114,7 @@ public class TestCaseTest {
 			tc.setLastTestedDateTime(null);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals((new Date(20170420)), tc.getLastTestedDateTime());
+			assertEquals(new Date(20170420), tc.getLastTestedDateTime());
 		}
 	}
 
@@ -127,7 +127,7 @@ public class TestCaseTest {
 			tc.setTestingType(null);
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals((new TestingType("id", "type1", "desc")), tc.getTestingType());
+			assertEquals(new TestingType("id", "type1", "desc"), tc.getTestingType());
 		}
 	}
 
@@ -168,14 +168,15 @@ public class TestCaseTest {
 		Date lastTested = new Date(20170420);
 		TestCase tc2 = new TestCase("id2", "desc", tt, created, "exp", false, lastTested, "act", false);
 		TestCase tc3 = new TestCase("id", "desc3", tt, created, "exp", false, lastTested, "act", false);
-		TestCase tc4 = new TestCase("id", "desc", (new TestingType("id2", "type1", "desc")), created, "exp", false, lastTested, "act", false);
-		TestCase tc5 = new TestCase("id", "desc", tt, (new Date(20170421)), "exp", false, lastTested, "act", false);
+		TestCase tc4 = new TestCase("id", "desc", new TestingType("id2", "type1", "desc"), created, "exp", false,
+				lastTested, "act", false);
+		TestCase tc5 = new TestCase("id", "desc", tt, new Date(20170421), "exp", false, lastTested, "act", false);
 		TestCase tc6 = new TestCase("id", "desc", tt, created, "exp6", false, lastTested, "act", false);
 		TestCase tc7 = new TestCase("id", "desc", tt, created, "exp", true, lastTested, "act", false);
-		TestCase tc8 = new TestCase("id", "desc", tt, created, "exp", false, (new Date(20170421)), "act", false);
+		TestCase tc8 = new TestCase("id", "desc", tt, created, "exp", false, new Date(20170421), "act", false);
 		TestCase tc9 = new TestCase("id", "desc", tt, created, "exp", false, lastTested, "act9", false);
 		TestCase tc10 = new TestCase("id", "desc", tt, created, "exp", false, lastTested, "act", true);
-		assertFalse(tc.equals(null));
+		assertFalse(tc == null);
 		assertTrue(tc.equals(tc));
 		assertFalse(tc.equals(tc2));
 		assertFalse(tc.equals(tc3));
